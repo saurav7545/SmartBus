@@ -1,0 +1,124 @@
+/* Base styles */
+.loginContainer {
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loginTitle {
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #0056b3, #004085);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* Tablet styles (481px to 768px) */
+@media (max-width: 768px) {
+  .loginContainer {
+    max-width: 350px;
+    padding: 25px;
+    margin: 40px auto;
+  }
+
+  .loginTitle {
+    font-size: 22px;
+  }
+
+  .input {
+    padding: 10px;
+  }
+
+  .button {
+    padding: 10px;
+  }
+}
+
+/* Mobile styles (480px and below) */
+@media (max-width: 480px) {
+  .loginContainer {
+    max-width: 90%;
+    padding: 20px;
+    margin: 30px auto;
+  }
+
+  .loginTitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .formGroup {
+    margin-bottom: 15px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .input {
+    padding: 10px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}

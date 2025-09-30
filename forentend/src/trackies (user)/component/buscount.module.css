@@ -1,0 +1,94 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  width: 320px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+  max-height: 60vh;
+  animation: slideUp 0.3s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.busList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.busItem {
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.busInfo h4 {
+  margin: 0 0 5px 0;
+}
+
+.busInfo p {
+  margin: 2px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.bookButton {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.bookButton:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100vw;
+    height: 50vh;
+    left: 12px;
+    right: 12px;
+    bottom: 0;
+    top: auto;
+    border-radius: 20px 20px 0 0;
+    max-height: none;
+    animation: slideUp 0.3s ease-out;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

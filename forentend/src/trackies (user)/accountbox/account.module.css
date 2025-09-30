@@ -1,0 +1,92 @@
+.logo {
+  position: absolute;
+  top: 30px;
+  left: 12px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 2px;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 25vw;
+  height: 100vh;
+  background: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  padding: 20px;
+}
+
+
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.profilePicture {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #007bff;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.logoutButton {
+  width: 50px;
+  height: 25px;
+  position: absolute;
+  top: 160px;
+  left: 20px;
+  /* padding: 12px 24px; */
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  /* font-size: 16px; */
+  transition: background 0.3s ease;
+}
+
+.logoutButton:hover {
+  background: #c82333;
+}
+
+.sidebar hr {
+  position: absolute;
+  top: 130px;
+  left: 20px;
+  width: calc(100% - 40px);
+  border: none;
+  border-top: 1px solid #e1e5e9;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 50vw;
+  }
+}
