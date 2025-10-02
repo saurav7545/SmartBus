@@ -12,7 +12,8 @@ function Account() {
     // Implement logout logic to log out from the entire view
     console.log('Logout clicked')
     setIsOpen(false)
-    // Reload the page or reset app state to log out user
+    // Clear stored data and reload the page to log out user
+    localStorage.clear()
     window.location.reload()
   }
 

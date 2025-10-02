@@ -17,7 +17,7 @@ function Login({ onLogin }) {
 
   return (
     <div className={styles.loginContainer}>
-      <h2 className={styles.loginTitle}>Login to BusGo</h2>
+      <h2 className={styles.loginTitle}>Login to SmartBus</h2>
       <Mode onModeChange={setUserType} />
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
