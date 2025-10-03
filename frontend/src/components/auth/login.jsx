@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styles from './login.module.css';
 import Mode from './mode';
-import Registration from '../traceers (conductor)/component/registration';
+import Registration from '../dashboard/conductor/component/registration';
 
 const FIXED_CREDENTIALS = {
   user: { email: 'user@smartbus.com', password: 'user123' },
-  bus: { email: 'bus@smartbus.com', password: 'bus123' }
 };
 
 function Login({ onLogin }) {
@@ -134,32 +133,34 @@ function Login({ onLogin }) {
                     className={styles.linkButton} 
                     onClick={() => setShowRegistration(true)}
                   >
-                    Register as Bus Operator
+                    Register for Bus Operator
                   </button>
                 </>
               )}
             </div>
-             <div className={styles.demoSection}>
-              <div className={styles.demoHeader}>
-                <div className={styles.demoIcon}>🔐</div>
-                <h4 className={styles.demoTitle}>Demo Login Credentials</h4>
-              </div>
-              <div className={styles.demoContent}>
-                <div className={styles.userType}>
-                  <span className={styles.userBadge}>For {userType}</span>
+            {userType === 'user' && (
+              <div className={styles.demoSection}>
+                <div className={styles.demoHeader}>
+                  <div className={styles.demoIcon}>🔐</div>
+                  <h4 className={styles.demoTitle}>Demo Login Credentials</h4>
                 </div>
-                <div className={styles.credentialRow}>
-                  <div className={styles.credentialItem}>
-                    <span className={styles.credentialLabel}>Email:</span>
-                    <span className={styles.credentialValue}>{FIXED_CREDENTIALS[userType].email}</span>
+                <div className={styles.demoContent}>
+                  <div className={styles.userType}>
+                    <span className={styles.userBadge}>For {userType}</span>
                   </div>
-                  <div className={styles.credentialItem}>
-                    <span className={styles.credentialLabel}>Password:</span>
-                    <span className={styles.credentialValue}>{FIXED_CREDENTIALS[userType].password}</span>
+                  <div className={styles.credentialRow}>
+                    <div className={styles.credentialItem}>
+                      <span className={styles.credentialLabel}>Email:</span>
+                      <span className={styles.credentialValue}>{FIXED_CREDENTIALS[userType].email}</span>
+                    </div>
+                    <div className={styles.credentialItem}>
+                      <span className={styles.credentialLabel}>Password:</span>
+                      <span className={styles.credentialValue}>{FIXED_CREDENTIALS[userType].password}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
         <div className={styles.right}>

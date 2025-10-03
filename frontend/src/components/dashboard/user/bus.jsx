@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import MapView from './component/mapview'
-import Searchbar from './component/searchbar'
-import Account from './accountbox/account'
-import BusCount from './component/buscount'
-import styles from './bus.module.css'
+import React, { useState } from 'react';
+import MapView from './component/mapview';
+import Searchbar from './component/searchbar';
+import Account from './accountbox/account';
+import BusCount from './component/buscount';
+import styles from './bus.module.css';
 
 function Bus() {
-  const [showBuses, setShowBuses] = useState(false)
-  const [buses, setBuses] = useState([])
+  const [showBuses, setShowBuses] = useState(false);
+  const [buses, setBuses] = useState([]);
 
   const handleSearch = (currentLocation, destination) => {
     // Mock bus data
@@ -30,23 +30,23 @@ function Bus() {
         arrivalTime: '8:00 PM',
         seats: 22
       }
-    ]
-    setBuses(mockBuses)
-    setShowBuses(true)
-  }
+    ];
+    setBuses(mockBuses);
+    setShowBuses(true);
+  };
 
   const handleCloseBuses = () => {
-    setShowBuses(false)
-  }
+    setShowBuses(false);
+  };
 
   return (
     <div className={styles.busContainer}>
-      <MapView/>
-      <Searchbar onSearch={handleSearch}/>
-      <Account/>
-      {showBuses && <BusCount buses={buses} onClose={handleCloseBuses}/>}
+      <MapView />
+      <Searchbar onSearch={handleSearch} />
+      <Account />
+      {showBuses && <BusCount buses={buses} onClose={handleCloseBuses} />}
     </div>
-  )
+  );
 }
 
-export default Bus
+export default Bus;

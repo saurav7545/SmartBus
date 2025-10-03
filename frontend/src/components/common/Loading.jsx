@@ -14,7 +14,6 @@ function Loading() {
     }}>
       <div style={{ textAlign: 'center' }}>
         <img src="./logo.png" alt="Bus Logo" style={{ width: '200px', height: '200px', marginBottom: '20px', opacity: 0.8 }} />
-       
         <p>Loading...</p>
       </div>
     </div>

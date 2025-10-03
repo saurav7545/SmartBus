@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import Login from './login page/login';
-import Bus from './trackies (user)/bus';
-import Inter from './traceers (conductor)/inter';
-import Loading from './Loading';
-import Setup from './Setup';
-import LoginSuccess from './components/LoginSuccess';
+import Login from '../components/auth/login';
+import Bus from '../components/dashboard/user/bus';
+import Inter from '../components/dashboard/conductor/inter';
+import Loading from '../components/common/Loading';
+import LoginSuccess from '../components/common/LoginSuccess';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState('user'); // 'user' or 'conductor'
   const [isLoading, setIsLoading] = useState(true);
-  const [showSetup, setShowSetup] = useState(false);
   const [showLoginSuccess, setShowLoginSuccess] = useState(false);
   const [userData, setUserData] = useState(null);
 
@@ -31,24 +29,13 @@ function App() {
       // Bus operator को success screen दिखाएं
       setShowLoginSuccess(true);
     } else {
-      // User को directly setup screen (map) पर भेजें
-      setShowSetup(true);
+      // User को directly dashboard पर भेजें
+      setIsLoggedIn(true);
     }
   };
 
-  const handleSetupComplete = () => {
-    setShowSetup(false);
-    setIsLoggedIn(true);
-  };
-
   const handleContinueToDashboard = () => {
-    setShowLoginSuccess(false);
-    setShowSetup(true);
-  };
-
-  const handleLoginSuccessSkip = () => {
-    setShowLoginSuccess(false);
-    setIsLoggedIn(true);
+    alert('Coming Soon!');
   };
 
   if (isLoading) {
@@ -65,10 +52,6 @@ function App() {
     );
   }
 
-  if (showSetup) {
-    return <Setup userType={userType} onSetupComplete={handleSetupComplete} />;
-  }
-
   if (!isLoggedIn) {
     return <Login onLogin={handleLogin} />;
   }
@@ -81,4 +64,3 @@ function App() {
 }
 
 export default App;
-

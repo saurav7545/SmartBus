@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './mode.module.css';
 
 function Mode({ onModeChange }) {
-  const [activeMode, setActiveMode] = React.useState('user');
+  const [activeMode, setActiveMode] = useState('user');
 
   const handleModeChange = (mode) => {
     setActiveMode(mode);

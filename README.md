@@ -56,5 +56,8 @@ Open the app at the URL printed by Vite (typically http://localhost:5173).
 - CORS is enabled and the login endpoint is CSRF-exempt for SPA testing.
 
 ---
+### Bus registration 
+   add bus registration page and login thorw own emailid and password 
+   and show some message in next page 
 
 Made with ❤️ for faster SmartBus prototyping.
