@@ -1,81 +1,46 @@
-.loginContainer {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-.loginTitle {
+.modeContainer {
   margin-bottom: 20px;
+  text-align: center;
 }
 
-.formGroup {
+.modeTitle {
   margin-bottom: 15px;
+  color: #333;
+  font-size: 16px;
 }
 
-.label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-.button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #0056b3;
-}
-
-/* Toggle Box Styles */
-.toggleBox {
-  position: relative;
+.modeButtons {
   display: flex;
-  width: 200px;
-  height: 40px;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 2px solid #007bff;
-  margin: 20px auto;
-  cursor: pointer;
-  user-select: none;
-}
-
-.option {
-  flex: 1;
-  display: flex;
-  align-items: center;
+  gap: 15px;
   justify-content: center;
-  z-index: 2;
-  font-weight: bold;
+}
+
+.modeButton {
+  padding: 12px 24px;
+  border: 2px solid #007bff;
+  background-color: white;
   color: #007bff;
-  transition: color 0.3s;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 100px;
 }
 
-.option.active {
-  color: white;
+.modeButton:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
 }
 
-.slider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
+.modeButton.active {
   background-color: #007bff;
-  border-radius: 20px;
-  transition: transform 0.3s ease;
-  z-index: 1;
+  color: white;
+  border-color: #007bff;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.modeButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }

@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './mode.module.css';
 
 function Mode({ onModeChange }) {
-  const [isBus, setIsBus] = useState(false);
+  const [activeMode, setActiveMode] = React.useState('user');
 
-  const toggleMode = () => {
-    setIsBus(!isBus);
-    onModeChange(!isBus ? 'conductor' : 'user');
+  const handleModeChange = (mode) => {
+    setActiveMode(mode);
+    onModeChange(mode);
   };
 
   return (
-    <div className={styles.toggleBox} onClick={toggleMode}>
-      <div className={`${styles.option} ${!isBus ? styles.active : ''}`}>User</div>
-      <div className={`${styles.option} ${isBus ? styles.active : ''}`}>Bus</div>
-      <div
-        className={styles.slider}
-        style={{ transform: isBus ? 'translateX(100%)' : 'translateX(0)' }}
-      />
+    <div className={styles.modeContainer}>
+      <h3 className={styles.modeTitle}>Select Login Type</h3>
+      <div className={styles.modeButtons}>
+        <button
+          type="button"
+          className={`${styles.modeButton} ${activeMode === 'user' ? styles.active : ''}`}
+          onClick={() => handleModeChange('user')}
+        >
+          👤 User
+        </button>
+        <button
+          type="button"
+          className={`${styles.modeButton} ${activeMode === 'bus' ? styles.active : ''}`}
+          onClick={() => handleModeChange('bus')}
+        >
+          🚌 Bus
+        </button>
+      </div>
     </div>
   );
 }
