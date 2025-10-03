@@ -1,5 +1,5 @@
 import React from 'react'
-import Infopage from './component/infopage'
+import Infopage from './component/registrationc'
 
 
 function inter() {

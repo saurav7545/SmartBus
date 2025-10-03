@@ -22,7 +22,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleLogin = (selectedUserType) => {
+  const handleLogin = (selectedUserType, data) => {
     setUserType(selectedUserType);
     setShowSetup(true);
   };
