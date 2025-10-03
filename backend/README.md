@@ -2,32 +2,23 @@
 
 This is the Django backend for the SmartBus application.
 
-## Setup Instructions
+## Quick Setup (Virtual Environment Already Included)
 
-### 1. Create Virtual Environment
-```bash
-cd backend
-python -m venv bus
-```
-
-### 2. Activate Virtual Environment
+### 1. Activate Virtual Environment
 
 **Windows:**
 ```bash
+cd backend
 bus\Scripts\activate
 ```
 
 **Linux/Mac:**
 ```bash
+cd backend
 source bus/bin/activate
 ```
 
-### 3. Install Dependencies
-```bash
-pip install -r bus/requirements.txt
-```
-
-### 4. Database Setup
+### 2. Database Setup
 - Configure your database settings in `Smartbus/Smartbus/settings.py`
 - Run migrations:
 ```bash
@@ -36,22 +27,49 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 5. Run Development Server
+### 3. Run Development Server
 ```bash
 python manage.py runserver
+```
+
+## Alternative Setup (If Virtual Environment Issues)
+
+If you face issues with the included virtual environment, you can create a new one:
+
+### 1. Create New Virtual Environment
+```bash
+cd backend
+python -m venv bus_new
+```
+
+### 2. Activate and Install Dependencies
+```bash
+# Windows
+bus_new\Scripts\activate
+
+# Linux/Mac
+source bus_new/bin/activate
+
+# Install dependencies
+pip install -r bus/requirements.txt
 ```
 
 ## Project Structure
 ```
 backend/
-├── bus/                    # Virtual environment (excluded from git)
+├── bus/                    # Virtual environment (included in git)
+│   ├── Scripts/           # Activation scripts
+│   ├── Lib/               # Installed packages
+│   ├── Include/           # Headers
+│   ├── pyvenv.cfg         # Virtual environment config
+│   └── requirements.txt   # Python dependencies
 ├── Smartbus/              # Django project
 │   ├── bus/               # Bus app
 │   ├── mysql_config/      # Database configuration
 │   ├── notifications/     # Notifications app
 │   ├── users/             # Users app
 │   └── Smartbus/          # Main project settings
-└── requirements.txt       # Python dependencies
+└── README.md              # This file
 ```
 
 ## Dependencies
