@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './registration.module.css';
+import './registrationb.css';
 
 function Infopage() {
   const [formData, setFormData] = useState({
