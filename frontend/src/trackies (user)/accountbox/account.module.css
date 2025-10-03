@@ -84,9 +84,63 @@
   margin: 0;
 }
 
-/* Responsive */
+/* Responsive Design */
 @media (max-width: 768px) {
+  .logo {
+    top: 25px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+  }
+  
   .sidebar {
-    width: 50vw;
+    width: 70vw;
+  }
+  
+  .profilePicture {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .logoutButton {
+    top: 140px;
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    top: 20px;
+    left: 10px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .sidebar {
+    width: 85vw;
+    padding: 15px;
+  }
+  
+  .profilePicture {
+    width: 60px;
+    height: 60px;
+    top: 15px;
+    left: 15px;
+  }
+  
+  .logoutButton {
+    top: 120px;
+    left: 15px;
+    width: 70px;
+    height: 32px;
+    font-size: 11px;
+  }
+  
+  .sidebar hr {
+    top: 110px;
+    left: 15px;
+    width: calc(100% - 30px);
   }
 }

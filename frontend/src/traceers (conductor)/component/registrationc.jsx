@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import styles from './registrationb.css';
+import './registrationb.css';
 
 function Infopage() {
   const [formData, setFormData] = useState({
@@ -25,8 +25,8 @@ function Infopage() {
 
   if (!registered) {
     return (
-      <div className={styles.container}>
-        <div className={styles.card}>
+      <div className="container">
+        <div className="card">
           <h2>Bus Registration</h2>
           <form onSubmit={handleSubmit}>
             <label>Bus Name</label>
@@ -35,7 +35,7 @@ function Infopage() {
               name="busName"
               value={formData.busName}
               onChange={handleInputChange}
-              className={styles.input}
+              className="input"
               placeholder="Enter bus name"
               required
             />
@@ -45,7 +45,7 @@ function Infopage() {
               name="driverName"
               value={formData.driverName}
               onChange={handleInputChange}
-              className={styles.input}
+              className="input"
               placeholder="Enter driver name"
               required
             />
@@ -55,7 +55,7 @@ function Infopage() {
               name="travelAgency"
               value={formData.travelAgency}
               onChange={handleInputChange}
-              className={styles.input}
+              className="input"
               placeholder="Enter travel agency"
               required
             />
@@ -65,11 +65,11 @@ function Infopage() {
               name="busNumber"
               value={formData.busNumber}
               onChange={handleInputChange}
-              className={styles.input}
+              className="input"
               placeholder="Enter bus number"
               required
             />
-            <button type="submit" className={styles.button}>
+            <button type="submit" className="button">
               Register
             </button>
           </form>
@@ -79,8 +79,8 @@ function Infopage() {
   } else {
     // Registered page
     return (
-      <div className={styles.container}>
-        <div className={styles.card}>
+      <div className="container">
+        <div className="card">
           <h2>Bus Information</h2>
           <p><strong>Bus Name:</strong> {formData.busName}</p>
           <p><strong>Driver Name:</strong> {formData.driverName}</p>

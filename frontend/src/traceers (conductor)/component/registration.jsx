@@ -9,11 +9,7 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
     confirmPassword: '',
     busName: '',
     busNumber: '',
-    routeFrom: '',
-    routeTo: '',
-    travelAgency: '',
-    phoneNumber: '',
-    licenseNumber: ''
+    route: ''
   });
   
   const [errors, setErrors] = useState({});
@@ -39,11 +35,7 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
     if (!formData.confirmPassword) newErrors.confirmPassword = 'Confirm password is required';
     if (!formData.busName.trim()) newErrors.busName = 'Bus name is required';
     if (!formData.busNumber.trim()) newErrors.busNumber = 'Bus number is required';
-    if (!formData.routeFrom.trim()) newErrors.routeFrom = 'Route from is required';
-    if (!formData.routeTo.trim()) newErrors.routeTo = 'Route to is required';
-    if (!formData.travelAgency.trim()) newErrors.travelAgency = 'Travel agency is required';
-    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = 'Phone number is required';
-    if (!formData.licenseNumber.trim()) newErrors.licenseNumber = 'License number is required';
+    if (!formData.route.trim()) newErrors.route = 'Route is required';
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -59,12 +51,6 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
     // Confirm password validation
     if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
-    }
-
-    // Phone number validation
-    const phoneRegex = /^[0-9]{10}$/;
-    if (formData.phoneNumber && !phoneRegex.test(formData.phoneNumber)) {
-      newErrors.phoneNumber = 'Please enter a valid 10-digit phone number';
     }
 
     setErrors(newErrors);
@@ -94,11 +80,7 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
           userType: 'bus',
           busName: formData.busName,
           busNumber: formData.busNumber,
-          routeFrom: formData.routeFrom,
-          routeTo: formData.routeTo,
-          travelAgency: formData.travelAgency,
-          phoneNumber: formData.phoneNumber,
-          licenseNumber: formData.licenseNumber
+          route: formData.route
         }),
       });
 
@@ -112,11 +94,7 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
           email: formData.email,
           busName: formData.busName,
           busNumber: formData.busNumber,
-          routeFrom: formData.routeFrom,
-          routeTo: formData.routeTo,
-          travelAgency: formData.travelAgency,
-          phoneNumber: formData.phoneNumber,
-          licenseNumber: formData.licenseNumber
+          route: formData.route
         }));
         
         // Call success callback after 2 seconds
@@ -138,16 +116,21 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
     return (
       <div className={styles.container}>
         <div className={styles.card}>
-          <div className={styles.successIcon}>✅</div>
-          <h2 className={styles.successTitle}>Registration Successful!</h2>
+          <div className={styles.successIcon}>🎉</div>
+          <h2 className={styles.successTitle}>Welcome {formData.name}!</h2>
           <p className={styles.successMessage}>
-            Your bus conductor account has been created successfully. 
+            Your SmartBus account has been created successfully! 
             You can now login with your credentials.
           </p>
           <div className={styles.successDetails}>
-            <p><strong>Email:</strong> {formData.email}</p>
-            <p><strong>Bus:</strong> {formData.busName} ({formData.busNumber})</p>
-            <p><strong>Route:</strong> {formData.routeFrom} → {formData.routeTo}</p>
+            <div className={styles.successCard}>
+              <h3>🚌 Your Bus Details</h3>
+              <p><strong>Operator:</strong> {formData.name}</p>
+              <p><strong>Email:</strong> {formData.email}</p>
+              <p><strong>Bus:</strong> {formData.busName}</p>
+              <p><strong>Number:</strong> {formData.busNumber}</p>
+              <p><strong>Route:</strong> {formData.route}</p>
+            </div>
           </div>
           <p className={styles.redirectMessage}>Redirecting to login...</p>
         </div>
@@ -159,8 +142,9 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <h2>Bus Conductor Registration</h2>
-          <p>Create your account to start managing your bus</p>
+          <div className={styles.headerIcon}>🚌</div>
+          <h2>Bus Operator Registration</h2>
+          <p>Join SmartBus network and manage your bus operations</p>
         </div>
 
         {errors.general && (
@@ -168,11 +152,7 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
         )}
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formSection}>
-            <h3>Personal Information</h3>
-            
             <div className={styles.formGroup}>
-              <label htmlFor="name">Full Name *</label>
               <input
                 type="text"
                 id="name"
@@ -180,13 +160,12 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
                 value={formData.name}
                 onChange={handleInputChange}
                 className={errors.name ? styles.inputError : styles.input}
-                placeholder="Enter your full name"
+                placeholder="Full Name"
               />
               {errors.name && <span className={styles.error}>{errors.name}</span>}
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="email">Email Address *</label>
               <input
                 type="email"
                 id="email"
@@ -194,45 +173,12 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
                 value={formData.email}
                 onChange={handleInputChange}
                 className={errors.email ? styles.inputError : styles.input}
-                placeholder="Enter your email address"
+                placeholder="Email Address"
               />
               {errors.email && <span className={styles.error}>{errors.email}</span>}
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="phoneNumber">Phone Number *</label>
-              <input
-                type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-                className={errors.phoneNumber ? styles.inputError : styles.input}
-                placeholder="Enter your 10-digit phone number"
-              />
-              {errors.phoneNumber && <span className={styles.error}>{errors.phoneNumber}</span>}
-            </div>
-
-            <div className={styles.formGroup}>
-              <label htmlFor="licenseNumber">License Number *</label>
-              <input
-                type="text"
-                id="licenseNumber"
-                name="licenseNumber"
-                value={formData.licenseNumber}
-                onChange={handleInputChange}
-                className={errors.licenseNumber ? styles.inputError : styles.input}
-                placeholder="Enter your driving license number"
-              />
-              {errors.licenseNumber && <span className={styles.error}>{errors.licenseNumber}</span>}
-            </div>
-          </div>
-
-          <div className={styles.formSection}>
-            <h3>Login Credentials</h3>
-            
-            <div className={styles.formGroup}>
-              <label htmlFor="password">Password *</label>
               <input
                 type="password"
                 id="password"
@@ -240,13 +186,12 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
                 value={formData.password}
                 onChange={handleInputChange}
                 className={errors.password ? styles.inputError : styles.input}
-                placeholder="Create a strong password"
+                placeholder="Password"
               />
               {errors.password && <span className={styles.error}>{errors.password}</span>}
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="confirmPassword">Confirm Password *</label>
               <input
                 type="password"
                 id="confirmPassword"
@@ -254,17 +199,12 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
                 className={errors.confirmPassword ? styles.inputError : styles.input}
-                placeholder="Confirm your password"
+                placeholder="Confirm Password"
               />
               {errors.confirmPassword && <span className={styles.error}>{errors.confirmPassword}</span>}
             </div>
-          </div>
 
-          <div className={styles.formSection}>
-            <h3>Bus Information</h3>
-            
             <div className={styles.formGroup}>
-              <label htmlFor="busName">Bus Name *</label>
               <input
                 type="text"
                 id="busName"
@@ -272,13 +212,12 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
                 value={formData.busName}
                 onChange={handleInputChange}
                 className={errors.busName ? styles.inputError : styles.input}
-                placeholder="Enter bus name"
+                placeholder="Bus Name"
               />
               {errors.busName && <span className={styles.error}>{errors.busName}</span>}
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="busNumber">Bus Number *</label>
               <input
                 type="text"
                 id="busNumber"
@@ -286,55 +225,23 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
                 value={formData.busNumber}
                 onChange={handleInputChange}
                 className={errors.busNumber ? styles.inputError : styles.input}
-                placeholder="Enter bus number (e.g., UP-14-AB-1234)"
+                placeholder="Bus Number"
               />
               {errors.busNumber && <span className={styles.error}>{errors.busNumber}</span>}
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="travelAgency">Travel Agency *</label>
               <input
                 type="text"
-                id="travelAgency"
-                name="travelAgency"
-                value={formData.travelAgency}
+                id="route"
+                name="route"
+                value={formData.route}
                 onChange={handleInputChange}
-                className={errors.travelAgency ? styles.inputError : styles.input}
-                placeholder="Enter travel agency name"
+                className={errors.route ? styles.inputError : styles.input}
+                placeholder="Route (e.g., Delhi to Dehradun)"
               />
-              {errors.travelAgency && <span className={styles.error}>{errors.travelAgency}</span>}
+              {errors.route && <span className={styles.error}>{errors.route}</span>}
             </div>
-
-            <div className={styles.routeGroup}>
-              <div className={styles.formGroup}>
-                <label htmlFor="routeFrom">Route From *</label>
-                <input
-                  type="text"
-                  id="routeFrom"
-                  name="routeFrom"
-                  value={formData.routeFrom}
-                  onChange={handleInputChange}
-                  className={errors.routeFrom ? styles.inputError : styles.input}
-                  placeholder="Starting point"
-                />
-                {errors.routeFrom && <span className={styles.error}>{errors.routeFrom}</span>}
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="routeTo">Route To *</label>
-                <input
-                  type="text"
-                  id="routeTo"
-                  name="routeTo"
-                  value={formData.routeTo}
-                  onChange={handleInputChange}
-                  className={errors.routeTo ? styles.inputError : styles.input}
-                  placeholder="Destination"
-                />
-                {errors.routeTo && <span className={styles.error}>{errors.routeTo}</span>}
-              </div>
-            </div>
-          </div>
 
           <div className={styles.buttonGroup}>
             <button
@@ -349,7 +256,7 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
               className={styles.primaryButton}
               disabled={loading}
             >
-              {loading ? 'Creating Account...' : 'Register Now'}
+              {loading ? 'Creating...' : 'Register'}
             </button>
           </div>
         </form>

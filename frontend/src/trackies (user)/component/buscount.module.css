@@ -72,15 +72,47 @@
 
 @media (max-width: 768px) {
   .container {
-    width: 100vw;
+    width: calc(100vw - 20px);
     height: 50vh;
-    left: 12px;
-    right: 12px;
+    left: 10px;
+    right: 10px;
     bottom: 0;
     top: auto;
     border-radius: 20px 20px 0 0;
     max-height: none;
+    padding: 15px;
     animation: slideUp 0.3s ease-out;
+  }
+  
+  .busItem {
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .bookButton {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100vw - 10px);
+    height: 45vh;
+    left: 5px;
+    right: 5px;
+    padding: 12px;
+  }
+  
+  .busInfo h4 {
+    font-size: 16px;
+  }
+  
+  .busInfo p {
+    font-size: 12px;
   }
 }
 

@@ -1,6 +1,8 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
+from django.contrib.auth.hashers import check_password
+from .models import User, Bus
 import json
 import hashlib
 import uuid
@@ -50,7 +52,7 @@ def fixed_login(request):
             
             credentials = FIXED_CREDENTIALS[user_type]
             
-            # Validate credentials against fixed ones
+            # First check fixed credentials
             if (email == credentials['email'] and password == credentials['password']):
                 return JsonResponse({
                     'success': True,
@@ -59,11 +61,25 @@ def fixed_login(request):
                     'name': credentials['name'],
                     'email': email
                 })
-            else:
-                return JsonResponse({
-                    'success': False,
-                    'message': 'Invalid email or password'
-                }, status=401)
+            
+            # Then check database users
+            try:
+                user = User.objects.get(email=email, user_type=user_type)
+                if check_password(password, user.password):
+                    return JsonResponse({
+                        'success': True,
+                        'message': f'Welcome back {user.name}!',
+                        'user_type': user_type,
+                        'name': user.name,
+                        'email': email
+                    })
+            except User.DoesNotExist:
+                pass
+            
+            return JsonResponse({
+                'success': False,
+                'message': 'Invalid email or password'
+            }, status=401)
                 
         except json.JSONDecodeError:
             return JsonResponse({
@@ -141,21 +157,17 @@ def register(request):
         try:
             data = json.loads(request.body)
             
-            # Extract form data
+            # Extract form data (simplified)
             name = data.get('name', '').strip()
             email = data.get('email', '').strip()
             password = data.get('password', '').strip()
             user_type = data.get('userType', 'bus')
             bus_name = data.get('busName', '').strip()
             bus_number = data.get('busNumber', '').strip()
-            route_from = data.get('routeFrom', '').strip()
-            route_to = data.get('routeTo', '').strip()
-            travel_agency = data.get('travelAgency', '').strip()
-            phone_number = data.get('phoneNumber', '').strip()
-            license_number = data.get('licenseNumber', '').strip()
+            route = data.get('route', '').strip()
             
             # Validation
-            if not all([name, email, password, bus_name, bus_number, route_from, route_to, travel_agency, phone_number, license_number]):
+            if not all([name, email, password, bus_name, bus_number, route]):
                 return JsonResponse({
                     'success': False,
                     'message': 'All fields are required'
@@ -175,53 +187,42 @@ def register(request):
                     'message': 'Password must be at least 6 characters long'
                 }, status=400)
             
-            # Phone validation
-            if not phone_number.isdigit() or len(phone_number) != 10:
+            # Check if email already exists
+            if User.objects.filter(email=email).exists():
                 return JsonResponse({
                     'success': False,
-                    'message': 'Please enter a valid 10-digit phone number'
+                    'message': 'Email already registered'
                 }, status=400)
             
-            # Check if email already exists
-            with connection.cursor() as cursor:
-                cursor.execute("SELECT COUNT(*) FROM users WHERE email = %s", [email])
-                if cursor.fetchone()[0] > 0:
-                    return JsonResponse({
-                        'success': False,
-                        'message': 'Email already registered'
-                    }, status=400)
-                
-                # Create user record
-                user_id = str(uuid.uuid4())
-                hashed_password = hashlib.sha256(password.encode()).hexdigest()
-                
-                cursor.execute("""
-                    INSERT INTO users (id, name, email, password, user_type, phone_number, license_number, created_at)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, NOW())
-                """, [user_id, name, email, hashed_password, user_type, phone_number, license_number])
-                
-                # Create bus record
-                bus_id = str(uuid.uuid4())
-                cursor.execute("""
-                    INSERT INTO buses (id, user_id, bus_name, bus_number, route_from, route_to, travel_agency, created_at)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, NOW())
-                """, [bus_id, user_id, bus_name, bus_number, route_from, route_to, travel_agency])
-                
-                connection.commit()
-                
-                print(f"Registration successful: {email}, {name}, {bus_name}")
-                
-                return JsonResponse({
-                    'success': True,
-                    'message': 'Registration successful',
-                    'user_id': user_id,
-                    'bus_id': bus_id,
-                    'name': name,
-                    'email': email,
-                    'bus_name': bus_name,
-                    'bus_number': bus_number,
-                    'route': f"{route_from} → {route_to}"
-                })
+            # Create user using Django model
+            user = User.objects.create(
+                name=name,
+                email=email,
+                password=password,  # Will be hashed automatically in model
+                user_type=user_type
+            )
+            
+            # Create bus record
+            bus = Bus.objects.create(
+                user=user,
+                bus_name=bus_name,
+                bus_number=bus_number,
+                route=route
+            )
+            
+            print(f"Registration successful: {email}, {name}, {bus_name}")
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'Welcome {name}! Your account has been created successfully.',
+                'user_id': str(user.id),
+                'bus_id': str(bus.id),
+                'name': name,
+                'email': email,
+                'bus_name': bus_name,
+                'bus_number': bus_number,
+                'route': route
+            })
                 
         except json.JSONDecodeError:
             return JsonResponse({

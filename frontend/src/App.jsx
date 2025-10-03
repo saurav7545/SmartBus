@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Login from './login page/login';
-import Mode from './login page/mode';
 import Bus from './trackies (user)/bus';
 import Inter from './traceers (conductor)/inter';
 import Loading from './Loading';
 import Setup from './Setup';
-import buscount from './trackies (user)/component/buscount';
+import LoginSuccess from './components/LoginSuccess';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userType, setUserType] = useState('user'); // 'user' or 'conductor'
   const [isLoading, setIsLoading] = useState(true);
   const [showSetup, setShowSetup] = useState(false);
+  const [showLoginSuccess, setShowLoginSuccess] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     // Simulate loading delay for splash screen
@@ -24,7 +25,15 @@ function App() {
 
   const handleLogin = (selectedUserType, data) => {
     setUserType(selectedUserType);
-    setShowSetup(true);
+    setUserData(data);
+    
+    if (selectedUserType === 'bus') {
+      // Bus operator को success screen दिखाएं
+      setShowLoginSuccess(true);
+    } else {
+      // User को directly setup screen (map) पर भेजें
+      setShowSetup(true);
+    }
   };
 
   const handleSetupComplete = () => {
@@ -32,8 +41,28 @@ function App() {
     setIsLoggedIn(true);
   };
 
+  const handleContinueToDashboard = () => {
+    setShowLoginSuccess(false);
+    setShowSetup(true);
+  };
+
+  const handleLoginSuccessSkip = () => {
+    setShowLoginSuccess(false);
+    setIsLoggedIn(true);
+  };
+
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (showLoginSuccess) {
+    return (
+      <LoginSuccess 
+        userType={userType}
+        userData={userData}
+        onContinue={handleContinueToDashboard}
+      />
+    );
   }
 
   if (showSetup) {

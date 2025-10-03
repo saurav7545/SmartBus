@@ -43,7 +43,7 @@ function Setup({ userType, onSetupComplete }) {
       <div className={styles.setupContent}>
         <div className={styles.logoContainer}>
           <img
-            src="/logo.png"
+            src="./logo.png"
             alt="Bus Logo"
             className={styles.logo}
           />

@@ -2,7 +2,7 @@ import React from 'react'
 import Infopage from './component/registrationc'
 
 
-function inter() {
+function Inter() {
   return (
     <div>
       <Infopage />
@@ -11,4 +11,4 @@ function inter() {
   )
 }
 
-export default inter
+export default Inter

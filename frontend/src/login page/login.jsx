@@ -126,14 +126,18 @@ function Login({ onLogin }) {
 
             <div className={styles.authLinks}>
               <button type="button" className={styles.linkButton} onClick={() => alert('Forgot password flow coming soon')}>Forgot password?</button>
-              <span className={styles.linkDivider}>·</span>
-              <button 
-                type="button" 
-                className={styles.linkButton} 
-                onClick={() => setShowRegistration(true)}
-              >
-                Register Now
-              </button>
+              {userType === 'bus' && (
+                <>
+                  <span className={styles.linkDivider}>·</span>
+                  <button 
+                    type="button" 
+                    className={styles.linkButton} 
+                    onClick={() => setShowRegistration(true)}
+                  >
+                    Register as Bus Operator
+                  </button>
+                </>
+              )}
             </div>
              <div className={styles.demoSection}>
               <div className={styles.demoHeader}>

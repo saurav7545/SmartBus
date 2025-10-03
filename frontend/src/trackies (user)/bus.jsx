@@ -3,8 +3,9 @@ import MapView from './component/mapview'
 import Searchbar from './component/searchbar'
 import Account from './accountbox/account'
 import BusCount from './component/buscount'
+import styles from './bus.module.css'
 
-function bus() {
+function Bus() {
   const [showBuses, setShowBuses] = useState(false)
   const [buses, setBuses] = useState([])
 
@@ -39,7 +40,7 @@ function bus() {
   }
 
   return (
-    <div style={{ position: 'relative', height: '100vh', width: 'calc(100vw - 20px)', left: '20px' }}>
+    <div className={styles.busContainer}>
       <MapView/>
       <Searchbar onSearch={handleSearch}/>
       <Account/>
@@ -48,4 +49,4 @@ function bus() {
   )
 }
 
-export default bus
+export default Bus
