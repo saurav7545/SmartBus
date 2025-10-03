@@ -66,7 +66,7 @@ function Infopage() {
               value={formData.busNumber}
               onChange={handleInputChange}
               className="input"
-              placeholder="Enter bus number"
+              placeholder="Enter bus number (e.g., DL01AB1234, HR55C9876, UP14T2020)"
               required
             />
             <button type="submit" className="button">

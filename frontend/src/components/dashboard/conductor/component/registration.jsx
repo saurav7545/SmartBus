@@ -212,7 +212,7 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
                 value={formData.busName}
                 onChange={handleInputChange}
                 className={errors.busName ? styles.inputError : styles.input}
-                placeholder="Bus Name"
+                placeholder="Bus Name (e.g., Volvo AC, Ashok Leyland, Tata Marcopolo)"
               />
               {errors.busName && <span className={styles.error}>{errors.busName}</span>}
             </div>
@@ -225,7 +225,7 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
                 value={formData.busNumber}
                 onChange={handleInputChange}
                 className={errors.busNumber ? styles.inputError : styles.input}
-                placeholder="Bus Number"
+                placeholder="Bus Number (e.g., DL01AB1234, HR55C9876, UP14T2020)"
               />
               {errors.busNumber && <span className={styles.error}>{errors.busNumber}</span>}
             </div>
