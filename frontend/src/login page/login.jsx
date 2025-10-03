@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './login.module.css';
 import Mode from './mode';
+import Registration from '../traceers (conductor)/component/registration';
 
 const FIXED_CREDENTIALS = {
   user: { email: 'user@smartbus.com', password: 'user123' },
@@ -13,6 +14,7 @@ function Login({ onLogin }) {
   const [userType, setUserType] = useState('user');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +49,33 @@ function Login({ onLogin }) {
       setLoading(false);
     }
   };
+
+  const handleRegistrationSuccess = (registeredEmail, registeredPassword) => {
+    setEmail(registeredEmail);
+    setPassword(registeredPassword);
+    setUserType('bus');
+    setShowRegistration(false);
+    // Auto-submit login form
+    setTimeout(() => {
+      const form = document.querySelector('form');
+      if (form) {
+        form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+      }
+    }, 100);
+  };
+
+  const handleBackToLogin = () => {
+    setShowRegistration(false);
+  };
+
+  if (showRegistration) {
+    return (
+      <Registration 
+        onBackToLogin={handleBackToLogin}
+        onRegistrationSuccess={handleRegistrationSuccess}
+      />
+    );
+  }
 
   return (
     <div className={styles.page}>
@@ -98,7 +127,13 @@ function Login({ onLogin }) {
             <div className={styles.authLinks}>
               <button type="button" className={styles.linkButton} onClick={() => alert('Forgot password flow coming soon')}>Forgot password?</button>
               <span className={styles.linkDivider}>·</span>
-              <button type="button" className={styles.linkButton} onClick={() => alert('Sign up flow coming soon')}>Create account</button>
+              <button 
+                type="button" 
+                className={styles.linkButton} 
+                onClick={() => setShowRegistration(true)}
+              >
+                Register Now
+              </button>
             </div>
              <div className={styles.demoSection}>
               <div className={styles.demoHeader}>
