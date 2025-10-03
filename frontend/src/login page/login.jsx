@@ -60,7 +60,6 @@ function Login({ onLogin }) {
             <h2 className={styles.loginTitle}>Login to SmartBus</h2>
             <p className={styles.subtitle}>Welcome back! Please enter your details to continue.</p>
             <Mode onModeChange={setUserType} />
-      
       <form onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="email" className={styles.label}>Email:</label>
