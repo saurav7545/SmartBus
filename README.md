@@ -27,9 +27,14 @@ SmartBus is a simple two-sided app (User / Bus Operator) with a modern, responsi
 1) Backend (Windows PowerShell)
 ```
 cd backend/Smartbus
-..\bus\Scripts\Activate.ps1
-python manage.py runserver 0.0.0.0:8000
+.\bus\Scripts\Activate.ps1
+python manage.py runserver
 ```
+cd backend/Smartbus
+.\bus\Scripts\Activate
+python manage.py runserver
+```
+
 
 2) Frontend
 ```
