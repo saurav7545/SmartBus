@@ -1,63 +1,83 @@
-# ✨ SmartBus – Login & Starter Guide
+**SmartBus - AI-Powered Public Transportation System**  
 
-<p align="center">
-  <img src="frontend/public/logo.png" alt="SmartBus" width="220" />
-</p>
+A modern, intelligent public bus management system that leverages AI and real-time data to optimize routes, enhance user experience, and improve operational efficiency.  
 
 ---
 
-![React](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB?logo=react&logoColor=white) 
-![Django](https://img.shields.io/badge/Backend-Django-092E20?logo=django&logoColor=white) 
-![CSS Modules](https://img.shields.io/badge/Styles-CSS%20Modules-2965f1?logo=css3&logoColor=white)
-
-### 🌈 Overview
-SmartBus is a simple two-sided app (User / Bus Operator) with a modern, responsive login page built in React + Vite, and a Django backend. The goal is to provide a clean starting point you can extend into a full bus-tracking system.
-
-### 🚀 Key Features (current)
-- Two-panel, colorful login UI with brand header and responsive layout
-- Role toggle (User / Bus)
-- Demo credentials helper section
-- Simple Django JSON login endpoint for quick testing
-
-### 🧩 Tech Stack
-- Frontend: React (Vite), CSS Modules
-- Backend: Django 5, MySQL client (demo fixed-auth endpoint)
-
-### ⚡ Quick Start
-1) Backend (Windows PowerShell)
-```
-cd backend/Smartbus
-.\bus\Scripts\Activate.ps1
-python manage.py runserver
-```
-cd backend/Smartbus
-.\bus\Scripts\Activate
-python manage.py runserver
-```
-
-
-2) Frontend
-```
-cd frontend
-npm install
-npm run dev
-```
-
-Open the app at the URL printed by Vite (typically http://localhost:5173).
-
-
-
-### 🧪 Demo Credentials
-- User: `user@smartbus.com` / `user123`
-- Bus: `bus@smartbus.com` / `bus123`
-
-### 📝 Notes
-- Frontend image path uses Vite's `import.meta.env.BASE_URL` to ensure the bus image (`frontend/public/logo.png`) works in dev and builds.
-- CORS is enabled and the login endpoint is CSRF-exempt for SPA testing.
+## 🚀 Features  
+- **Real-Time Bus Tracking** - Live location updates and ETAs  
+- **AI Route Optimization** - Dynamic routing based on traffic and demand  
+- **Digital Ticketing** - QR-based mobile tickets  
+- **Passenger Analytics** - Insights into peak hours and popular routes  
+- **Admin Dashboard** - Manage buses, routes, and view reports  
+- **User Mobile App** - Easy booking and real-time updates  
 
 ---
-### Bus registration 
-   add bus registration page and login thorw own emailid and password 
-   and show some message in next page 
 
-Made with ❤️ for faster SmartBus prototyping.
+## 🛠️ Tech Stack  
+- **Frontend**: React.js, Tailwind CSS  
+- **Mobile App**: React Native  
+- **Backend**: Node.js, Express.js  
+- **Database**: MongoDB  
+- **AI/ML**: Python, TensorFlow (for route optimization)  
+- **Cloud**: AWS/Azure (for deployment)  
+- **APIs**: Google Maps API, Payment Gateway Integration  
+
+---
+
+## 📦 Installation  
+
+### Prerequisites  
+- React.js   
+- MySQL
+- Python (for backend )  
+
+### Steps  
+1. **Clone the Repository**  
+   ```bash  
+   git clone https://github.com/saurav7545/SmartBus.git  
+   cd SmartBus  
+   ```  
+   ```
+   cd frontend
+   npm run dev
+
+
+---
+
+## 📱 Usage  
+1. **For Passengers**  
+   - Open the SmartBus mobile web 
+   - Create an account and log in  
+   - Search for routes and book tickets  
+   - Track bus location in real-time  
+
+---
+
+## 🖼️ Screenshots  
+*(Add relevant screenshots here)*  
+- Dashboard Overview  
+- Mobile App Interface  
+- Admin Panel  
+- Real-Time Tracking Map  
+
+---  
+
+---
+
+## 📄 License  
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.  
+
+---
+
+## 📞 Contact  
+- **Author**: TeamPlankton 
+- **GitHub**: [saurav7545](https://github.com/saurav7545)  
+
+---
+
+
+
+---
+
+**⭐ Don't forget to star the repository if you find this project useful!**

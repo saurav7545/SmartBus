@@ -20,30 +20,61 @@ function Login({ onLogin }) {
     setError('');
     setLoading(true);
 
+    // Simulate loading delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     try {
-      const response = await fetch('http://localhost:8000/api/auth/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          userType: userType
-        }),
-      });
+      // Mock authentication logic
+      let isValidUser = false;
+      let userData = {};
 
-      const data = await response.json();
+      if (userType === 'user') {
+        // Check against fixed credentials for users
+        if (email === FIXED_CREDENTIALS.user.email && password === FIXED_CREDENTIALS.user.password) {
+          isValidUser = true;
+          userData = {
+            success: true,
+            user: {
+              id: 'user_001',
+              name: 'Smart User',
+              email: email,
+              userType: 'user'
+            },
+            token: 'mock_token_' + Date.now()
+          };
+        }
+      } else if (userType === 'bus') {
+        // Check against localStorage for registered bus operators
+        const registeredUsers = JSON.parse(localStorage.getItem('registeredBusOperators')) || [];
+        const user = registeredUsers.find(u => u.email === email && u.password === password);
+        
+        if (user) {
+          isValidUser = true;
+          userData = {
+            success: true,
+            user: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              userType: 'bus',
+              busName: user.busName,
+              busNumber: user.busNumber,
+              route: user.route
+            },
+            token: 'mock_token_' + Date.now()
+          };
+        }
+      }
 
-      if (data.success) {
-        console.log('Login successful:', data);
-        onLogin(userType, data);
+      if (isValidUser) {
+        console.log('Login successful:', userData);
+        onLogin(userType, userData);
       } else {
-        setError(data.message);
+        setError('Invalid email or password. Please check your credentials.');
       }
     } catch (error) {
       console.error('Login error:', error);
-      setError('Network error. Please try again.');
+      setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }

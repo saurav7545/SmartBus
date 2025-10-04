@@ -66,47 +66,63 @@ function Registration({ onBackToLogin, onRegistrationSuccess }) {
 
     setLoading(true);
 
+    // Simulate loading delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     try {
-      // Simulate API call - replace with actual backend endpoint
-      const response = await fetch('http://localhost:8000/api/auth/register/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          userType: 'bus',
-          busName: formData.busName,
-          busNumber: formData.busNumber,
-          route: formData.route
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        setSuccess(true);
-        // Store registration data in localStorage
-        localStorage.setItem('busRegistration', JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          busName: formData.busName,
-          busNumber: formData.busNumber,
-          route: formData.route
-        }));
-        
-        // Call success callback after 2 seconds
-        setTimeout(() => {
-          onRegistrationSuccess(formData.email, formData.password);
-        }, 2000);
-      } else {
-        setErrors({ general: data.message || 'Registration failed. Please try again.' });
+      // Check if email already exists
+      const existingUsers = JSON.parse(localStorage.getItem('registeredBusOperators')) || [];
+      const emailExists = existingUsers.some(user => user.email === formData.email);
+      const busNumberExists = existingUsers.some(user => user.busNumber === formData.busNumber);
+      
+      if (emailExists) {
+        setErrors({ general: 'Email already registered. Please use a different email address.' });
+        return;
       }
+      
+      if (busNumberExists) {
+        setErrors({ general: 'Bus number already registered. Please use a different bus number.' });
+        return;
+      }
+
+      // Create new user object
+      const newUser = {
+        id: 'bus_' + Date.now(),
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        userType: 'bus',
+        busName: formData.busName,
+        busNumber: formData.busNumber,
+        route: formData.route,
+        registrationDate: new Date().toISOString()
+      };
+
+      // Add to existing users
+      existingUsers.push(newUser);
+      
+      // Store in localStorage
+      localStorage.setItem('registeredBusOperators', JSON.stringify(existingUsers));
+      
+      // Also store individual registration data for backward compatibility
+      localStorage.setItem('busRegistration', JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        busName: formData.busName,
+        busNumber: formData.busNumber,
+        route: formData.route
+      }));
+      
+      setSuccess(true);
+      
+      // Call success callback after 2 seconds
+      setTimeout(() => {
+        onRegistrationSuccess(formData.email, formData.password);
+      }, 2000);
+      
     } catch (error) {
       console.error('Registration error:', error);
-      setErrors({ general: 'Network error. Please try again.' });
+      setErrors({ general: 'An error occurred during registration. Please try again.' });
     } finally {
       setLoading(false);
     }

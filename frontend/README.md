@@ -177,38 +177,8 @@ Login → "Register as Bus Operator" → Fill Form → Success → Auto-Login
 
 ---
 
-## 🔧 Development Guide
 
-### Adding New Components
-```jsx
-// 1. Create component file
-src/components/category/NewComponent.jsx
 
-// 2. Create styles
-src/components/category/NewComponent.module.css
-
-// 3. Use CSS Modules pattern
-import styles from './NewComponent.module.css';
-
-// 4. Implement responsive design
-@media (max-width: 480px) { /* Mobile */ }
-@media (max-width: 768px) { /* Tablet */ }
-@media (min-width: 1024px) { /* Desktop */ }
-```
-
-### Customization Points
-1. **Colors**: Update CSS custom properties
-2. **Breakpoints**: Modify media query values
-3. **Typography**: Adjust font sizes and weights
-4. **Animations**: Change transition durations
-5. **Layout**: Modify flexbox/grid properties
-
-### Testing Responsive Design
-```bash
-# Browser DevTools presets
-Mobile: 375×667 (iPhone SE)
-Tablet: 768×1024 (iPad)
-Desktop: 1920×1080
 
 # Key test points
 - Login form on mobile
@@ -236,46 +206,6 @@ Desktop: 1920×1080
 - **Loading States**: Smooth loading indicators
 - **Fallback UI**: Graceful degradation
 - **Input Sanitization**: XSS protection
-
----
-
-## 📝 API Integration
-
-### Authentication Endpoints
-```javascript
-// User Login
-POST /api/auth/login/
-{
-  "email": "user@smartbus.com",
-  "password": "user123",
-  "userType": "user"
-}
-
-// Bus Operator Registration
-POST /api/auth/register/
-{
-  "name": "Operator Name",
-  "email": "operator@example.com",
-  "password": "securePassword",
-  // ... additional fields
-}
-```
-
-### Error Handling
-```javascript
-try {
-  const response = await fetch('/api/auth/login/', options);
-  const data = await response.json();
-  
-  if (data.success) {
-    onLogin(userType, data);
-  } else {
-    setError(data.message);
-  }
-} catch (error) {
-  setError('Network error. Please try again.');
-}
-```
 
 ---
 
