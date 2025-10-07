@@ -1,0 +1,769 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  width: 340px;
+  max-width: 95vw;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+  max-height: 60vh;
+  animation: slideUp 0.3s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 123, 255, 0.1);
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header h3::before {
+  content: '🚌';
+  font-size: 20px;
+}
+
+.closeButton {
+  background: rgba(108, 117, 125, 0.1);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #6c757d;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-weight: 300;
+}
+
+.closeButton:hover {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  transform: scale(1.1);
+}
+
+.busList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.busItem {
+  border: 1px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.busItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-color: #007bff;
+}
+
+.busInfo {
+  flex: 1;
+}
+
+.busHeader {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.busLogo {
+  font-size: 35px;
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  border-radius: 12px;
+  padding: 8px;
+  border: 3px solid white;
+  box-shadow: 0 4px 15px rgba(255, 179, 71, 0.3);
+  animation: busFloat 3s ease-in-out infinite;
+}
+
+@keyframes busFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+}
+
+.busDetails {
+  flex: 1;
+}
+
+.busDetails h4 {
+  margin: 0 0 5px 0;
+  color: #2d3748;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.busNumber {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.busInfo p {
+  margin: 5px 0;
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.timeInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 10px 0;
+  padding: 10px;
+  background: rgba(248, 250, 252, 0.8);
+  border-radius: 8px;
+}
+
+.timeInfo p {
+  margin: 2px 0;
+  font-size: 12px;
+}
+
+.bottomInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.lowSeats {
+  color: #dc3545;
+  font-weight: 600;
+  padding: 2px 6px;
+  background: rgba(220, 53, 69, 0.1);
+  border-radius: 4px;
+}
+
+.availableSeats {
+  color: #28a745;
+  font-weight: 600;
+}
+
+.fareAmount {
+  color: #007bff;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.route {
+  color: #4a5568;
+  font-size: 14px;
+  margin: 10px 0 15px 0;
+  padding: 8px 12px;
+  background: rgba(0, 123, 255, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.liveInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.distance, .eta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin: 0;
+}
+
+.distanceIcon, .etaIcon {
+  font-size: 16px;
+}
+
+.distanceValue {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.trackNowButton {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 120px;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+  animation: trackPulse 2s ease-in-out infinite;
+}
+
+@keyframes trackPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3); }
+  50% { box-shadow: 0 6px 20px rgba(220, 53, 69, 0.5); }
+}
+
+.trackNowButton:hover {
+  background: linear-gradient(135deg, #c82333 0%, #a02622 100%);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+  animation: none;
+}
+
+.distanceInfo {
+  color: #007bff;
+  font-weight: 600;
+  font-size: 14px;
+  background: rgba(0, 123, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.favoriteButton {
+  background: transparent;
+  border: 2px solid #ffc107;
+  color: #ffc107;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.favoriteButton:hover:not(:disabled) {
+  background: #ffc107;
+  color: white;
+  transform: scale(1.05);
+}
+
+.favoriteButton:disabled {
+  border-color: #28a745;
+  color: #28a745;
+  cursor: default;
+}
+
+/* Enhanced Responsive Design for BusCount Component */
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .container {
+    width: 420px;
+    max-width: 35vw;
+    right: 30px;
+    bottom: 20px;
+    padding: 25px;
+    border-radius: 16px 16px 0 0;
+    max-height: 65vh;
+  }
+  
+  .header h3 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .busItem {
+    padding: 20px;
+    border-radius: 15px;
+    gap: 15px;
+  }
+  
+  .busLogo {
+    font-size: 40px;
+    padding: 10px;
+  }
+  
+  .busDetails h4 {
+    font-size: 20px;
+  }
+  
+  .busNumber {
+    font-size: 13px;
+    padding: 5px 12px;
+  }
+  
+  .route {
+    font-size: 15px;
+    padding: 10px 15px;
+  }
+  
+  .trackNowButton {
+    padding: 14px 24px;
+    font-size: 15px;
+    min-width: 140px;
+  }
+  
+  .distance, .eta {
+    font-size: 14px;
+  }
+  
+  .distanceValue {
+    font-size: 13px;
+    padding: 4px 12px;
+  }
+}
+
+/* Desktop/Laptop (769px - 1199px) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .container {
+    width: 380px;
+    max-width: 40vw;
+    right: 25px;
+    bottom: 15px;
+    padding: 22px;
+    border-radius: 14px 14px 0 0;
+    max-height: 60vh;
+  }
+  
+  .header h3 {
+    font-size: 19px;
+    font-weight: 600;
+  }
+  
+  .busItem {
+    padding: 18px;
+    border-radius: 14px;
+    gap: 12px;
+  }
+  
+  .busLogo {
+    font-size: 38px;
+    padding: 9px;
+  }
+  
+  .busDetails h4 {
+    font-size: 19px;
+  }
+  
+  .busNumber {
+    font-size: 12px;
+    padding: 4px 11px;
+  }
+  
+  .route {
+    font-size: 14px;
+    padding: 9px 13px;
+  }
+  
+  .trackNowButton {
+    padding: 13px 22px;
+    font-size: 14px;
+    min-width: 130px;
+  }
+  
+  .distance, .eta {
+    font-size: 13px;
+  }
+  
+  .distanceValue {
+    font-size: 12px;
+    padding: 3px 11px;
+  }
+}
+
+/* Tablet Portrait (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    width: calc(100vw - 30px);
+    height: 55vh;
+    left: 15px;
+    right: 15px;
+    bottom: 0;
+    top: auto;
+    border-radius: 20px 20px 0 0;
+    max-height: none;
+    padding: 18px;
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .header {
+    margin-bottom: 18px;
+  }
+  
+  .header h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .closeButton {
+    font-size: 26px;
+  }
+  
+  .busList {
+    gap: 16px;
+  }
+  
+  .busItem {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 12px;
+  }
+  
+  .busHeader {
+    margin-bottom: 12px;
+    gap: 12px;
+  }
+  
+  .busLogo {
+    font-size: 32px;
+    padding: 8px;
+  }
+  
+  .busDetails h4 {
+    font-size: 17px;
+  }
+  
+  .busNumber {
+    font-size: 11px;
+    padding: 3px 9px;
+  }
+  
+  .route {
+    font-size: 13px;
+    padding: 8px 12px;
+    margin: 8px 0 12px 0;
+  }
+  
+  .liveInfo {
+    gap: 6px;
+    margin: 10px 0;
+  }
+  
+  .distance, .eta {
+    font-size: 12px;
+  }
+  
+  .distanceValue {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+  
+  .actionButtons {
+    min-width: unset;
+    width: 100%;
+  }
+  
+  .trackNowButton {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 13px;
+    min-width: unset;
+    border-radius: 12px;
+  }
+}
+
+/* Mobile Large (376px - 480px) */
+@media (min-width: 376px) and (max-width: 480px) {
+  .container {
+    width: calc(100vw - 20px);
+    height: 50vh;
+    left: 10px;
+    right: 10px;
+    bottom: 0;
+    padding: 15px;
+    border-radius: 18px 18px 0 0;
+  }
+  
+  .header h3 {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  
+  .closeButton {
+    font-size: 24px;
+  }
+  
+  .busList {
+    gap: 14px;
+  }
+  
+  .busItem {
+    padding: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-radius: 10px;
+  }
+  
+  .busHeader {
+    margin-bottom: 10px;
+    gap: 10px;
+  }
+  
+  .busLogo {
+    font-size: 28px;
+    padding: 6px;
+  }
+  
+  .busDetails h4 {
+    font-size: 16px;
+  }
+  
+  .busNumber {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+  
+  .route {
+    font-size: 12px;
+    padding: 6px 10px;
+    margin: 6px 0 10px 0;
+  }
+  
+  .liveInfo {
+    gap: 5px;
+    margin: 8px 0;
+  }
+  
+  .distance, .eta {
+    font-size: 11px;
+  }
+  
+  .distanceValue {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  
+  .actionButtons {
+    width: 100%;
+  }
+  
+  .trackNowButton {
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+}
+
+/* Mobile Small (320px - 375px) */
+@media (max-width: 375px) {
+  .container {
+    width: calc(100vw - 15px);
+    height: 48vh;
+    left: 7.5px;
+    right: 7.5px;
+    bottom: 0;
+    padding: 12px;
+    border-radius: 16px 16px 0 0;
+  }
+  
+  .header {
+    margin-bottom: 12px;
+  }
+  
+  .header h3 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .closeButton {
+    font-size: 22px;
+  }
+  
+  .busList {
+    gap: 12px;
+  }
+  
+  .busItem {
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    border-radius: 8px;
+  }
+  
+  .busHeader {
+    margin-bottom: 8px;
+    gap: 8px;
+  }
+  
+  .busLogo {
+    font-size: 24px;
+    padding: 5px;
+    border-radius: 8px;
+  }
+  
+  .busDetails h4 {
+    font-size: 15px;
+  }
+  
+  .busNumber {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 12px;
+  }
+  
+  .route {
+    font-size: 11px;
+    padding: 5px 8px;
+    margin: 5px 0 8px 0;
+    border-radius: 6px;
+  }
+  
+  .liveInfo {
+    gap: 4px;
+    margin: 6px 0;
+  }
+  
+  .distance, .eta {
+    font-size: 10px;
+    gap: 6px;
+  }
+  
+  .distanceIcon, .etaIcon {
+    font-size: 14px;
+  }
+  
+  .distanceValue {
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 10px;
+  }
+  
+  .actionButtons {
+    width: 100%;
+  }
+  
+  .trackNowButton {
+    width: 100%;
+    padding: 8px 14px;
+    font-size: 11px;
+    border-radius: 8px;
+    gap: 6px;
+  }
+}
+
+/* Ultra Small Mobile (max 320px) */
+@media (max-width: 320px) {
+  .container {
+    width: calc(100vw - 10px);
+    height: 45vh;
+    left: 5px;
+    right: 5px;
+    padding: 10px;
+    border-radius: 14px 14px 0 0;
+  }
+  
+  .header h3 {
+    font-size: 15px;
+  }
+  
+  .closeButton {
+    font-size: 20px;
+  }
+  
+  .busList {
+    gap: 10px;
+  }
+  
+  .busItem {
+    padding: 10px;
+    gap: 6px;
+  }
+  
+  .busHeader {
+    margin-bottom: 6px;
+    gap: 6px;
+  }
+  
+  .busLogo {
+    font-size: 20px;
+    padding: 4px;
+  }
+  
+  .busDetails h4 {
+    font-size: 14px;
+  }
+  
+  .busNumber {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+  
+  .route {
+    font-size: 10px;
+    padding: 4px 6px;
+    margin: 4px 0 6px 0;
+  }
+  
+  .distance, .eta {
+    font-size: 9px;
+    gap: 4px;
+  }
+  
+  .distanceIcon, .etaIcon {
+    font-size: 12px;
+  }
+  
+  .distanceValue {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+  
+  .trackNowButton {
+    padding: 6px 12px;
+    font-size: 10px;
+    gap: 4px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

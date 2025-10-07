@@ -1,0 +1,324 @@
+.busContainer {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .busContainer {
+    padding: 10px;
+    width: calc(100vw - 20px);
+    margin-left: 10px;
+    border-radius: 12px;
+  }
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .busContainer {
+    padding: 8px;
+    width: calc(100vw - 16px);
+    margin-left: 8px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+  .busContainer {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+/* Ensure smooth transitions */
+.busContainer * {
+  box-sizing: border-box;
+}
+
+/* Handle different screen orientations */
+@media (orientation: landscape) and (max-width: 767px) {
+  .busContainer {
+    height: 100vh;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 767px) {
+  .busContainer {
+    height: 100vh;
+  }
+}
+
+/* Enhanced User Dashboard Styles */
+.userControls {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 500;
+}
+
+.trackButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.trackButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+}
+
+.infoPanel {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 15px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  min-width: 200px;
+}
+
+.fareInfo, .locationInfo {
+  margin: 4px 0;
+  color: #2d3748;
+  font-weight: 500;
+}
+
+
+/* Map Overlay Styles */
+.mapOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.mapContainer {
+  width: 90%;
+  height: 80%;
+  max-width: 800px;
+  max-height: 600px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.mapCloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(220, 53, 69, 0.9);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.mapCloseButton:hover {
+  background: #dc3545;
+  transform: scale(1.05);
+}
+
+/* Find My Bus Section */
+.findMyBusSection {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 600;
+}
+
+.findMyBusBtn {
+  background: linear-gradient(135deg, #6f42c1, #5a3098);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 180px;
+  justify-content: center;
+}
+
+.findMyBusBtn:hover {
+  background: linear-gradient(135deg, #5a3098, #492672);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(111, 66, 193, 0.4);
+}
+
+.findBusIcon {
+  font-size: 18px;
+  animation: pulse 2s infinite;
+}
+
+.findMyBusDesc {
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 12px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.mapInfo {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.mapInfo h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #2d3748;
+}
+
+.mapInfo p {
+  margin: 4px 0;
+  font-size: 12px;
+  color: #4a5568;
+}
+
+.nearbyBuses h4 {
+  margin: 8px 0 4px 0;
+  font-size: 14px;
+  color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .userControls {
+    top: 60px;
+    right: 15px;
+    gap: 10px;
+  }
+  
+  .trackButton {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
+  
+  .infoPanel {
+    padding: 8px 12px;
+    font-size: 11px;
+    min-width: 160px;
+  }
+  
+  .recentSearches, .favorites {
+    left: 15px;
+    max-width: 250px;
+    padding: 12px;
+  }
+  
+  .recentSearches {
+    top: 60px;
+  }
+  
+  .favorites {
+    top: 180px;
+  }
+  
+  .mapContainer {
+    width: 95%;
+    height: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .userControls {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  
+  .trackButton {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .infoPanel {
+    padding: 6px 10px;
+    font-size: 10px;
+    min-width: 140px;
+  }
+  
+  .recentSearches, .favorites {
+    left: 10px;
+    max-width: 200px;
+    padding: 10px;
+  }
+  
+  .recentSearches {
+    top: 50px;
+  }
+  
+  .favorites {
+    top: 160px;
+  }
+  
+  .mapContainer {
+    width: 98%;
+    height: 90%;
+    border-radius: 12px;
+  }
+  
+  .mapInfo {
+    bottom: 15px;
+    left: 15px;
+    padding: 10px;
+  }
+}

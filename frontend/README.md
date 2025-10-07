@@ -1,6 +1,6 @@
-# SmartBus - Modern Bus Booking Platform
+# SmartBus - Live Bus Tracking Platform
 
-A comprehensive, mobile-first bus booking platform built with React and modern web technologies.
+A modern, real-time bus tracking system with 3D visualizations and live location updates built with React.
 
 ## 🚀 Quick Start
 
@@ -26,10 +26,12 @@ python manage.py runserver
 - **Bus Operator**: Register new account or use existing
 
 ### Key Features to Test
+- ✅ Real-time bus tracking with 3D bus visualization
+- ✅ Live distance calculation (meters/kilometers)
+- ✅ Interactive map with realistic bus movements
+- ✅ Track Now functionality (only show selected bus)
+- ✅ Location change animations and indicators
 - ✅ Mobile-responsive design
-- ✅ User/Bus operator registration
-- ✅ Interactive map interface
-- ✅ Real-time bus search
 - ✅ Professional UI/UX
 
 ---

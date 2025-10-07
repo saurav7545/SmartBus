@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Login from '../components/auth/login';
-import Bus from '../components/dashboard/user/bus';
-import Inter from '../components/dashboard/conductor/inter';
+import Login from './Auth/Login';
+import UserDashboard from './Dashboard/UserDashboard';
+import BusInterface from '../components/UI/BusInterface';
 import Loading from '../components/common/Loading';
 import LoginSuccess from '../components/common/LoginSuccess';
 
@@ -63,7 +63,7 @@ function App() {
 
   return (
     <div>
-      {userType === 'user' ? <Bus /> : <Inter userData={userData.user} />}
+      {userType === 'user' ? <UserDashboard /> : <BusInterface userData={userData.user} />}
     </div>
   );
 }

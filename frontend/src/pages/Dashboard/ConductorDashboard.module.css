@@ -1,0 +1,1557 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+}
+
+.accountCircle {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #007bff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+  /* Add margin bottom to separate from sidebar content */
+  margin-bottom: 20px;
+}
+
+.accountLetter {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  min-width: 200px;
+  max-width: 60%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-right: 1px solid #ccc;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow: auto;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidebarLine {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+  margin-top: 100px;
+}
+
+.sidebarTitle {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  padding: 10px 20px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.logoutButton {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.mainContent {
+  padding: 80px 20px 120px 20px; /* Added bottom padding for controls */
+  max-height: none;
+  overflow-y: visible;
+}
+
+.dashboardTitle {
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.outerBox {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+  border: 2px solid #007bff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.infoBoxes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 0;
+}
+
+.busInfoBox, .driverInfoBox {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  min-height: 180px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.busInfoBox:hover, .driverInfoBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.boxTitle {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 18px;
+}
+
+.busInfoBox .boxTitle {
+  color: #007bff;
+}
+
+.driverInfoBox .boxTitle {
+  color: #28a745;
+}
+
+/* Enhanced Responsive Design */
+
+/* Large Desktop (1200px+) */
+@media (min-width: 1200px) {
+  .container {
+    font-size: 16px;
+  }
+  
+  .outerBox {
+    max-width: 600px;
+    padding: 25px;
+  }
+  
+  .busInfoBox, .driverInfoBox {
+    width: 350px;
+    padding: 30px;
+    font-size: 18px;
+  }
+  
+  .controlCircle {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+  }
+  
+  .controlsContainer {
+    bottom: 40px;
+    right: 40px;
+    gap: 20px;
+  }
+}
+
+/* Desktop/Laptop (769px - 1199px) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .container {
+    font-size: 15px;
+  }
+  
+  .outerBox {
+    max-width: 550px;
+    padding: 22px;
+  }
+  
+  .busInfoBox, .driverInfoBox {
+    width: 320px;
+    padding: 25px;
+    font-size: 17px;
+  }
+  
+  .controlCircle {
+    width: 70px;
+    height: 70px;
+    font-size: 28px;
+  }
+  
+  .controlsContainer {
+    bottom: 30px;
+    right: 30px;
+    gap: 15px;
+  }
+  
+  .accountCircle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .sidebar {
+    width: 25%;
+    min-width: 220px;
+  }
+}
+
+/* Tablet (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    font-size: 14px;
+  }
+  
+  .infoBoxes {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .busInfoBox, .driverInfoBox {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    font-size: 16px;
+    min-height: 160px;
+  }
+
+  .mainContent {
+    padding: 70px 15px 130px 15px;
+  }
+
+  .dashboardTitle {
+    font-size: 24px;
+  }
+
+  .boxTitle {
+    font-size: 16px;
+  }
+  
+  .outerBox {
+    max-width: 90%;
+    padding: 18px;
+  }
+  
+  .controlCircle {
+    width: 65px;
+    height: 65px;
+    font-size: 26px;
+  }
+  
+  .controlsContainer {
+    bottom: 25px;
+    right: 25px;
+    gap: 12px;
+  }
+  
+  .accountCircle {
+    width: 55px;
+    height: 55px;
+    top: 15px;
+    left: 15px;
+  }
+  
+  .accountLetter {
+    font-size: 22px;
+  }
+  
+  .sidebar {
+    width: 35%;
+    min-width: 250px;
+    max-width: 70%;
+  }
+}
+
+/* Mobile (320px - 480px) */
+@media (max-width: 480px) {
+  .container {
+    font-size: 13px;
+  }
+  
+  .busInfoBox, .driverInfoBox {
+    width: 95%;
+    padding: 15px;
+    font-size: 15px;
+    min-height: 140px;
+  }
+
+  .mainContent {
+    padding: 60px 10px 140px 10px;
+  }
+
+  .dashboardTitle {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .boxTitle {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  
+  .outerBox {
+    padding: 15px;
+    border-radius: 10px;
+  }
+  
+  .controlCircle {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+  
+  .controlsContainer {
+    bottom: 20px;
+    right: 15px;
+    gap: 10px;
+  }
+  
+  .accountCircle {
+    width: 50px;
+    height: 50px;
+    top: 10px;
+    left: 10px;
+  }
+  
+  .accountLetter {
+    font-size: 20px;
+  }
+  
+  .sidebar {
+    width: 85%;
+    min-width: 280px;
+    max-width: 95%;
+    padding: 15px;
+  }
+  
+  .sidebarLine {
+    margin-top: 80px;
+  }
+}
+
+.gpsCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  font-size: 24px;
+}
+
+.gpsCircle:hover {
+  transform: scale(1.1);
+}
+
+.showMapButton {
+  margin-top: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.showMapButton:hover {
+  background-color: #0056b3;
+}
+
+/* Missing CSS classes for controls */
+.controlsContainer {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  z-index: 100;
+  pointer-events: none; /* Allow scrolling behind */
+}
+
+.controlsContainer > * {
+  pointer-events: all; /* Re-enable pointer events for buttons */
+}
+
+.controlCircle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  font-size: 28px;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.controlCircle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.controlCircle:active {
+  transform: scale(0.95);
+}
+
+/* Service status styles */
+.serviceOn {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  animation: pulse 2s infinite;
+}
+
+.serviceOff {
+  background: linear-gradient(135deg, #6c757d, #495057);
+}
+
+/* GPS status styles */
+.gpsOn {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  animation: pulse 2s infinite;
+}
+
+.gpsOff {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+/* Map overlay styles */
+.mapOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.mapContainer {
+  width: 90%;
+  height: 80%;
+  max-width: 800px;
+  max-height: 600px;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.mapCloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(220, 53, 69, 0.9);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.mapCloseButton:hover {
+  background: #dc3545;
+  transform: scale(1.05);
+}
+
+/* Sidebar buttons container */
+.sidebarButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.sidebarButtons button {
+  transition: all 0.3s ease;
+}
+
+.sidebarButtons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Show map container */
+.showMapContainer {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.showMapContainer .showMapButton {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(102, 126, 234, 0.3);
+}
+
+.showMapContainer .showMapButton:hover {
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Pulse animation for active states */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Enhanced Map and Controls Responsive Design */
+
+/* Large Desktop Map (1200px+) */
+@media (min-width: 1200px) {
+  .mapContainer {
+    width: 85%;
+    height: 75%;
+    max-width: 1000px;
+    max-height: 700px;
+    border-radius: 20px;
+  }
+  
+  .mapCloseButton {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+  
+  .showMapContainer .showMapButton {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+}
+
+/* Desktop/Laptop Map (769px - 1199px) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .mapContainer {
+    width: 88%;
+    height: 78%;
+    max-width: 900px;
+    max-height: 650px;
+    border-radius: 18px;
+  }
+  
+  .mapCloseButton {
+    padding: 11px 16px;
+    font-size: 14px;
+  }
+  
+  .showMapContainer .showMapButton {
+    padding: 9px 18px;
+    font-size: 12px;
+  }
+}
+
+/* Tablet Map (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .mapContainer {
+    width: 92%;
+    height: 82%;
+    max-width: 95vw;
+    max-height: 85vh;
+    border-radius: 16px;
+  }
+  
+  .mapCloseButton {
+    top: 12px;
+    right: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  .showMapContainer .showMapButton {
+    padding: 8px 16px;
+    font-size: 11px;
+  }
+}
+
+/* Mobile Map (320px - 480px) */
+@media (max-width: 480px) {
+  .mapContainer {
+    width: 96%;
+    height: 88%;
+    max-width: 98vw;
+    max-height: 90vh;
+    border-radius: 12px;
+  }
+  
+  .mapCloseButton {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .showMapContainer .showMapButton {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+}
+
+/* Stats and Analytics Responsive */
+@media (min-width: 1200px) {
+  .statsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 25px 0;
+  }
+  
+  .statCard {
+    padding: 25px;
+    border-radius: 18px;
+  }
+  
+  .statIcon {
+    font-size: 36px;
+    min-width: 55px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .statsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    padding: 22px 0;
+  }
+  
+  .statCard {
+    padding: 22px;
+    border-radius: 16px;
+  }
+  
+  .statIcon {
+    font-size: 34px;
+    min-width: 52px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .statsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 18px 0;
+  }
+  
+  .statCard {
+    padding: 18px;
+    border-radius: 14px;
+  }
+  
+  .statIcon {
+    font-size: 30px;
+    min-width: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsContainer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 15px 0;
+  }
+  
+  .statCard {
+    padding: 15px;
+    border-radius: 12px;
+    flex-direction: row;
+    text-align: left;
+  }
+  
+  .statIcon {
+    font-size: 28px;
+    min-width: 45px;
+  }
+}
+
+/* New Dashboard Features Styles */
+.statusActive {
+  color: #28a745;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+.statusInactive {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+  padding: 20px 0;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.statCard:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.statIcon {
+  font-size: 32px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.statInfo {
+  flex: 1;
+}
+
+.statNumber {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  display: block;
+  font-size: 14px;
+  color: #718096;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statButtons {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.statBtnAdd, .statBtnRemove {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.statBtnAdd {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+}
+
+.statBtnAdd:hover {
+  background: linear-gradient(135deg, #20c997, #28a745);
+  transform: scale(1.1);
+}
+
+.statBtnRemove {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.statBtnRemove:hover {
+  background: linear-gradient(135deg, #c82333, #dc3545);
+  transform: scale(1.1);
+}
+
+
+/* Responsive Stats */
+@media (max-width: 768px) {
+  .statsContainer {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 15px 0;
+  }
+  
+  .statCard {
+    padding: 15px;
+    gap: 10px;
+  }
+  
+  .statIcon {
+    font-size: 24px;
+    min-width: 40px;
+  }
+  
+  .statNumber {
+    font-size: 22px;
+  }
+  
+  .statLabel {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsContainer {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .statCard {
+    padding: 12px;
+    gap: 8px;
+  }
+  
+  .statIcon {
+    font-size: 20px;
+    min-width: 35px;
+  }
+  
+  .statNumber {
+    font-size: 18px;
+  }
+  
+  .statButtons {
+    margin-top: 5px;
+  }
+  
+  .statBtnAdd, .statBtnRemove {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+}
+
+/* Advanced Dashboard Features */
+.analyticsSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+  padding: 20px 0;
+}
+
+.weatherCard, .routeCard, .reportCard {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.weatherCard:hover, .routeCard:hover, .reportCard:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.weatherCard h3, .routeCard h3, .reportCard h3 {
+  margin: 0 0 15px 0;
+  color: #2d3748;
+  font-size: 16px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.weatherInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.temp {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.condition {
+  font-size: 14px;
+  color: #4a5568;
+  background: #f8fafc;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.routeStatus {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.statusBadge {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.statusBtn {
+  background: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.statusBtn:hover {
+  background: #007bff;
+  color: white;
+}
+
+.reportStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.reportStat {
+  text-align: center;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.statValue {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.alertsSection {
+  background: rgba(255, 243, 205, 0.95);
+  border: 2px solid #ffc107;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.alertsSection h3 {
+  margin: 0 0 15px 0;
+  color: #856404;
+  font-size: 16px;
+}
+
+.alertsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alertItem {
+  background: rgba(255, 193, 7, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  color: #856404;
+  font-size: 14px;
+  border-left: 4px solid #ffc107;
+}
+
+/* GPS Icon Styles - Google Maps Location Pin */
+.gpsIcon {
+  width: 24px;
+  height: 32px;
+  position: relative;
+  transform: translateY(-2px);
+}
+
+.gpsIcon::before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  top: 0;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.gpsIcon::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  top: 8px;
+  left: 8px;
+  transform: rotate(45deg);
+}
+
+/* GPS Icon colors for different states */
+.gpsOn .gpsIcon::before {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.4);
+}
+
+.gpsOff .gpsIcon::before {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.4);
+}
+
+/* GPS Icon hover effect */
+.controlCircle:hover .gpsIcon::before {
+  transform: rotate(-45deg) scale(1.1);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.6);
+}
+
+/* Emergency button styles */
+.emergencyOn {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  animation: emergencyPulse 1s infinite;
+}
+
+.emergencyOff {
+  background: linear-gradient(135deg, #6c757d, #495057);
+}
+
+@keyframes emergencyPulse {
+  0% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(220, 53, 69, 0.7);
+  }
+  70% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 15px rgba(220, 53, 69, 0);
+  }
+  100% {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(220, 53, 69, 0);
+  }
+}
+
+/* Notifications Panel */
+.notificationsPanel {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(15px);
+  z-index: 1500;
+  min-width: 350px;
+  max-width: 90vw;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notificationsPanel h4 {
+  margin: 0 0 10px 0;
+  color: #2d3748;
+  font-size: 14px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 5px;
+}
+
+.notificationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notification {
+  padding: 10px 12px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  animation: slideInFromTop 0.3s ease-out;
+}
+
+.notification.emergency {
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #c53030;
+}
+
+.notification.success {
+  background: #f0fff4;
+  border: 1px solid #9ae6b4;
+  color: #2f855a;
+}
+
+.notification.warning {
+  background: #fffbf0;
+  border: 1px solid #fbb040;
+  color: #dd6b20;
+}
+
+.notification.info {
+  background: #ebf8ff;
+  border: 1px solid #90cdf4;
+  color: #2b6cb0;
+}
+
+.notificationMessage {
+  flex: 1;
+  font-weight: 500;
+}
+
+.notificationTime {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Analytics and Notifications Responsive Design */
+
+/* Large Desktop Analytics (1200px+) */
+@media (min-width: 1200px) {
+  .analyticsSection {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 30px 0;
+  }
+  
+  .weatherCard, .routeCard, .reportCard {
+    padding: 25px;
+    border-radius: 18px;
+  }
+  
+  .weatherCard h3, .routeCard h3, .reportCard h3 {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+  
+  .temp {
+    font-size: 28px;
+  }
+  
+  .condition {
+    font-size: 15px;
+    padding: 6px 10px;
+  }
+  
+  .reportStats {
+    gap: 12px;
+  }
+  
+  .statValue {
+    font-size: 20px;
+  }
+  
+  .statLabel {
+    font-size: 12px;
+  }
+  
+  .statusBadge {
+    font-size: 15px;
+    padding: 10px 15px;
+  }
+  
+  .statusBtn {
+    font-size: 13px;
+    padding: 10px 15px;
+  }
+  
+  .alertsSection {
+    padding: 25px;
+    border-radius: 18px;
+  }
+  
+  .notificationsPanel {
+    min-width: 400px;
+    padding: 20px;
+    max-height: 450px;
+  }
+}
+
+/* Desktop/Laptop Analytics (769px - 1199px) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .analyticsSection {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 25px 0;
+  }
+  
+  .weatherCard, .routeCard, .reportCard {
+    padding: 22px;
+    border-radius: 16px;
+  }
+  
+  .weatherCard h3, .routeCard h3, .reportCard h3 {
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+  
+  .temp {
+    font-size: 26px;
+  }
+  
+  .condition {
+    font-size: 14px;
+    padding: 5px 9px;
+  }
+  
+  .reportStats {
+    gap: 11px;
+  }
+  
+  .statValue {
+    font-size: 19px;
+  }
+  
+  .statusBadge {
+    font-size: 14px;
+    padding: 9px 14px;
+  }
+  
+  .statusBtn {
+    font-size: 12px;
+    padding: 9px 14px;
+  }
+  
+  .alertsSection {
+    padding: 22px;
+    border-radius: 16px;
+  }
+  
+  .notificationsPanel {
+    min-width: 370px;
+    padding: 18px;
+    max-height: 400px;
+  }
+}
+
+/* Tablet Analytics (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .analyticsSection {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 18px 0;
+  }
+  
+  .weatherCard, .routeCard, .reportCard {
+    padding: 18px;
+    border-radius: 14px;
+  }
+  
+  .weatherCard h3, .routeCard h3, .reportCard h3 {
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+  
+  .temp {
+    font-size: 24px;
+  }
+  
+  .condition {
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+  
+  .reportStats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .statValue {
+    font-size: 18px;
+  }
+  
+  .statusBadge {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  
+  .statusBtn {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+  
+  .alertsSection {
+    padding: 18px;
+    border-radius: 14px;
+  }
+  
+  .alertItem {
+    font-size: 13px;
+    padding: 9px;
+  }
+  
+  .notificationsPanel {
+    min-width: 320px;
+    left: 15px;
+    right: 15px;
+    transform: none;
+    max-height: 300px;
+    top: 15px;
+    padding: 15px;
+  }
+  
+  /* GPS Icon tablet responsive */
+  .gpsIcon {
+    width: 20px;
+    height: 28px;
+  }
+  
+  .gpsIcon::before {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .gpsIcon::after {
+    width: 7px;
+    height: 7px;
+    top: 6.5px;
+    left: 6.5px;
+  }
+}
+
+/* Mobile Analytics (320px - 480px) */
+@media (max-width: 480px) {
+  .analyticsSection {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 15px 0;
+  }
+  
+  .weatherCard, .routeCard, .reportCard {
+    padding: 15px;
+    border-radius: 12px;
+  }
+  
+  .weatherCard h3, .routeCard h3, .reportCard h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  
+  .weatherInfo {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .temp {
+    font-size: 22px;
+  }
+  
+  .condition {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .reportStats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .reportStat {
+    padding: 8px;
+  }
+  
+  .statValue {
+    font-size: 16px;
+  }
+  
+  .statLabel {
+    font-size: 10px;
+  }
+  
+  .routeStatus {
+    gap: 8px;
+  }
+  
+  .statusBadge {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  
+  .statusBtn {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+  
+  .alertsSection {
+    padding: 15px;
+    border-radius: 12px;
+  }
+  
+  .alertsSection h3 {
+    font-size: 14px;
+  }
+  
+  .alertItem {
+    font-size: 12px;
+    padding: 8px;
+  }
+  
+  .notificationsPanel {
+    min-width: 95%;
+    padding: 12px;
+    max-height: 250px;
+    top: 10px;
+    left: 2.5%;
+    right: 2.5%;
+    transform: none;
+    border-radius: 12px;
+  }
+  
+  .notificationsPanel h4 {
+    font-size: 13px;
+  }
+  
+  .notification {
+    padding: 8px 10px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
+  
+  .notificationMessage {
+    font-size: 11px;
+  }
+  
+  .notificationTime {
+    font-size: 10px;
+  }
+  
+  /* GPS Icon mobile responsive */
+  .gpsIcon {
+    width: 18px;
+    height: 24px;
+  }
+  
+  .gpsIcon::before {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .gpsIcon::after {
+    width: 6px;
+    height: 6px;
+    top: 6px;
+    left: 6px;
+  }
+}
+
+/* Ultra Small Mobile (max 360px) */
+@media (max-width: 360px) {
+  .container {
+    font-size: 12px;
+  }
+  
+  .outerBox {
+    margin: 0 5px;
+    padding: 12px;
+  }
+  
+  .busInfoBox, .driverInfoBox {
+    width: 98%;
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .controlCircle {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+  }
+  
+  .controlsContainer {
+    bottom: 15px;
+    right: 10px;
+    gap: 8px;
+  }
+  
+  .accountCircle {
+    width: 45px;
+    height: 45px;
+    top: 8px;
+    left: 8px;
+  }
+  
+  .accountLetter {
+    font-size: 18px;
+  }
+  
+  .sidebar {
+    width: 95%;
+    min-width: 300px;
+    padding: 12px;
+  }
+}

@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'users',
     'mysql_config',
+    'route',
 ]
 
 MIDDLEWARE = [
