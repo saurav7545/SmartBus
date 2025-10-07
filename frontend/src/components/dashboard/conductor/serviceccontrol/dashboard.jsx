@@ -1,19 +1,19 @@
 import React, { useState, useMemo } from 'react'
 import styles from './dashboard.module.css'
 
-const AccountCircle = ({ driverName, onClick }) => (
+const AccountCircle = ({ operatorName, onClick }) => (
   <div className={styles.accountCircle} onClick={onClick} title="Account">
-    <span className={styles.accountLetter}>{driverName ? driverName.charAt(0).toUpperCase() : 'A'}</span>
+    <span className={styles.accountLetter}>{operatorName ? operatorName.charAt(0).toUpperCase() : 'A'}</span>
   </div>
 );
 
 const Sidebar = ({ busInfo, onLogout, onClose }) => (
   <aside className={styles.sidebar}>
-    <AccountCircle driverName={busInfo.driverName} onClick={onClose} />
+    <AccountCircle operatorName={busInfo.name} onClick={onClose} />
     <hr className={styles.sidebarLine} />
     <h2 className={styles.sidebarTitle}>Account Details</h2>
     <p><strong>Bus Name:</strong> {busInfo.busName || 'N/A'}</p>
-    <p><strong>Driver Name:</strong> {busInfo.driverName || 'N/A'}</p>
+    <p><strong>Operator Name:</strong> {busInfo.name || 'N/A'}</p>
     <div className={styles.sidebarButtons}>
       <button className={styles.closeButton} onClick={onClose}>Close</button>
       <button className={styles.logoutButton} onClick={onLogout}>Logout</button>
@@ -53,22 +53,23 @@ function Dashboard({ busInfo, onLogout }) {
   };
 
   const toggleGPS = () => {
-    // If turning GPS on
     if (!gpsOn) {
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
           setGpsOn(true);
+          console.log('GPS Activated. Location:', pos.coords);
         },
         (err) => {
-          console.error('GPS error:', err);
+          console.error('Error getting GPS location:', err);
+          alert('Could not get GPS location. Please ensure location services are enabled and permissions are granted.');
         }
       );
-    // If turning GPS off
     } else {
       setGpsOn(false);
       setLocation(null);
       setShowMap(false);
+      console.log('GPS Deactivated.');
     }
   };
 
@@ -79,7 +80,7 @@ function Dashboard({ busInfo, onLogout }) {
   return (
     <div className={styles.container}>
       {/* Account Circle */}
-      <AccountCircle driverName={busInfo.driverName} onClick={toggleSidebar} />
+      <AccountCircle operatorName={busInfo.name} onClick={toggleSidebar} />
 
       {sidebarOpen && <Sidebar busInfo={busInfo} onLogout={onLogout} onClose={toggleSidebar} />}
 
@@ -102,29 +103,31 @@ function Dashboard({ busInfo, onLogout }) {
         </div>
       </div>
 
-      {/* Service and GPS Circles */}
-      <div className={styles.controlsContainer}>
-        <button
-          onClick={toggleService}
-          className={`${styles.controlCircle} ${serviceRunning ? styles.serviceOn : styles.serviceOff}`}
-          title={serviceRunning ? 'Service Running' : 'Service Stopped'}
-        >
-          <span>🚍</span>
-        </button>
-        <button
-          onClick={toggleGPS}
-          className={`${styles.controlCircle} ${styles.gpsCircle} ${gpsOn ? styles.gpsOn : styles.gpsOff}`}
-          title={gpsOn ? 'GPS On' : 'GPS Off'}
-        >
-          <span>📍</span>
-        </button>
-        {location && (
-          <div className={styles.showMapContainer}>
+      {/* GPS Controls */}
+      <div className={styles.gpsControlsContainer}>
+        <div className={styles.availabilityButtonWrapper}>
+          <button
+            onClick={toggleService}
+            className={`${styles.availabilityCircle} ${serviceRunning ? styles.available : styles.notAvailable}`}
+            title={serviceRunning ? 'Set to Not Available' : 'Set to Available'}
+          >
+            🚍
+          </button>
+        </div>
+        <div className={styles.gpsButtonWrapper}>
+          <button
+            onClick={toggleGPS}
+            className={`${styles.gpsCircle} ${gpsOn ? styles.gpsOn : styles.gpsOff}`}
+            title={gpsOn ? 'Turn GPS Off' : 'Turn GPS On'}
+          >
+            📍
+          </button>
+          {gpsOn && location && (
             <button className={styles.showMapButton} onClick={() => setShowMap(true)}>
-              Show on Map
+              Show Map
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       {showMap && <MapView location={location} onClose={() => setShowMap(false)} />}
