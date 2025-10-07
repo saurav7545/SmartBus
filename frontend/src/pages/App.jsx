@@ -43,6 +43,13 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUserData(null);
+    // Reset to default user type to ensure the login screen is consistent
+    setUserType('user');
+  };
+
   if (isLoading) {
     return <Loading />;
   }
@@ -63,7 +70,7 @@ function App() {
 
   return (
     <div>
-      {userType === 'user' ? <Bus /> : <Inter userData={userData.user} />}
+      {userType === 'user' ? <Bus onLogout={handleLogout} /> : <Inter userData={userData.user} onLogout={handleLogout} />}
     </div>
   );
 }
