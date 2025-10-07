@@ -35,7 +35,12 @@ function App() {
   };
 
   const handleContinueToDashboard = () => {
-    alert('Coming Soon!');
+    setShowLoginSuccess(false);
+    setIsLoggedIn(true);
+    // Clean up temporary registration data from localStorage
+    if (userType === 'bus') {
+      localStorage.removeItem('busRegistration');
+    }
   };
 
   if (isLoading) {
@@ -46,7 +51,7 @@ function App() {
     return (
       <LoginSuccess 
         userType={userType}
-        userData={userData}
+        userData={userData.user}
         onContinue={handleContinueToDashboard}
       />
     );
@@ -58,7 +63,7 @@ function App() {
 
   return (
     <div>
-      {userType === 'user' ? <Bus /> : <Inter />}
+      {userType === 'user' ? <Bus /> : <Inter userData={userData.user} />}
     </div>
   );
 }
