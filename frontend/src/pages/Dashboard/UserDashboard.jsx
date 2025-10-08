@@ -170,13 +170,44 @@ function UserDashboard({ onLogout }) {
 
 
   const handleTrackBus = (bus) => {
-    // Show coming soon message
-    addToast('🚧 Coming Soon! Live bus tracking feature will be available in the next update.', 'info', 5000);
-    
-    // Additional info toast
-    setTimeout(() => {
-      addToast('📱 Stay tuned for real-time bus tracking, route updates, and more!', 'info', 4000);
-    }, 2000);
+    try {
+      // Store bus info in localStorage for smartbus-tracker
+      const busTrackingData = {
+        busNumber: bus.busNumber,
+        busName: bus.name,
+        route: bus.route,
+        currentLocation: bus.currentLocation,
+        distance: bus.distance,
+        eta: bus.eta,
+        timestamp: new Date().toISOString()
+      };
+      
+      localStorage.setItem('smartbus_tracking_data', JSON.stringify(busTrackingData));
+      
+      // Show tracking started message
+      addToast(`🚌 Starting live tracking for ${bus.name} (${bus.busNumber})`, 'success', 3000);
+      
+      // Open smartbus-tracker in new window/tab
+      const trackerUrl = 'http://localhost:3001'; // smartbus-tracker default port
+      const trackerWindow = window.open(trackerUrl, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+      
+      if (!trackerWindow) {
+        // If popup blocked, try direct navigation
+        addToast('⚠️ Popup blocked. Opening tracker in new tab...', 'warning', 3000);
+        setTimeout(() => {
+          window.open(trackerUrl, '_blank');
+        }, 1000);
+      } else {
+        // Success message
+        setTimeout(() => {
+          addToast('📍 Live tracking opened in new window. You can track your bus in real-time!', 'info', 5000);
+        }, 2000);
+      }
+      
+    } catch (error) {
+      console.error('Error opening bus tracker:', error);
+      addToast('❌ Error opening live tracker. Please ensure smartbus-tracker is running on port 3001.', 'error', 5000);
+    }
   };
   
   

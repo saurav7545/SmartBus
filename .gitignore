@@ -1,63 +1,44 @@
-# Python
+# SmartBus Project - Minimal GitIgnore
+# Including most files for easy deployment and demo
+
+# ========== SYSTEM FILES ONLY ==========
+# Python Cache
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+*.pyc
+*.pyo
 
-# Django
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-media/
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Node.js (for frontend)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# IDE
-.vscode/
-.idea/
+# IDE Files
+.vscode/settings.json
+.idea/workspace.xml
 *.swp
 *.swo
 
-# OS
+# OS Files
 .DS_Store
+.DS_Store?
 Thumbs.db
+ehthumbs.db
+desktop.ini
 
-# AL (Business Central) - keeping original entries
-.alcache/
-.alpackages/
-.snapshots/
-.output/
-*.app
-rad.json
-*.g.xlf
-*.flf
-TestResults.xml
+# Logs (but keep sample logs)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# ========== KEEP EVERYTHING ELSE ==========
+# This includes:
+# - node_modules (for easy setup)
+# - .env files (for configuration)
+# - build files (for deployment)
+# - database files (for demo)
+# - All source code and assets
+
+# Note: This approach ensures the project runs immediately after cloning
+# without requiring npm install or complex setup
