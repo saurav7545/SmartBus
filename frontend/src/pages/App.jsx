@@ -70,11 +70,7 @@ function App() {
 
   return (
     <div>
-<<<<<<< HEAD
-      {userType === 'user' ? <UserDashboard /> : <BusInterface userData={userData.user} />}
-=======
-      {userType === 'user' ? <Bus onLogout={handleLogout} /> : <Inter userData={userData.user} onLogout={handleLogout} />}
->>>>>>> a7f3628963a5c14d4aff299d4fb3e4c17b6901ed
+      {userType === 'user' ? <UserDashboard onLogout={handleLogout} /> : <BusInterface userData={userData.user} onLogout={handleLogout} />}
     </div>
   );
 }

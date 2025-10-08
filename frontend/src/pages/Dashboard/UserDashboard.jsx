@@ -8,7 +8,7 @@ import { ToastContainer, useToast } from '../../components/common/Toast';
 import styles from './UserDashboard.module.css';
 
 
-function UserDashboard() {
+function UserDashboard({ onLogout }) {
   const [showBuses, setShowBuses] = useState(false);
   const [buses, setBuses] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
@@ -196,7 +196,7 @@ function UserDashboard() {
         userLocation={userLocation}
       />
       <SearchBar onSearch={handleSearch} onFindMyBus={handleFindMyBus} />
-      <UserAccount />
+      <UserAccount onLogout={onLogout} />
       
 
       

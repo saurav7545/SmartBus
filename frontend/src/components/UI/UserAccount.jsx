@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './UserAccount.module.css';
 
-function Account() {
+function Account({ onLogout }) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClick = () => {
@@ -9,12 +9,15 @@ function Account() {
   } 
 
   const handleLogout = () => {
-    // Implement logout logic to log out from the entire view
     console.log('Logout clicked')
     setIsOpen(false)
-    // Clear stored data and reload the page to log out user
-    localStorage.clear()
-    window.location.reload()
+    if (onLogout) {
+      onLogout()
+    } else {
+      // Fallback logout logic
+      localStorage.clear()
+      window.location.reload()
+    }
   }
 
   const handleClose = () => {

@@ -1,16 +1,16 @@
 import React from 'react';
 import ConductorDashboard from '../../pages/Dashboard/ConductorDashboard';
 
-function BusInterface({ userData }) {
+function BusInterface({ userData, onLogout }) {
   const handleLogout = () => {
-    // Clear localStorage
-    localStorage.clear();
-    
-    // Show confirmation and reload
-    alert('You have been logged out successfully!');
-    
-    // Reload the page to reset to login state
-    window.location.reload();
+    if (onLogout) {
+      onLogout();
+    } else {
+      // Fallback logout logic
+      localStorage.clear();
+      alert('You have been logged out successfully!');
+      window.location.reload();
+    }
   };
 
   return <ConductorDashboard busInfo={userData} onLogout={handleLogout} />;
