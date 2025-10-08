@@ -67,7 +67,7 @@ function MapView({ userLocation }) {
           transform: 'translate(-50%, -50%)',
           zIndex: 15
         }}>
-          📍
+          
         </div>
         
         {/* Map controls overlay */}
