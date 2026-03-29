@@ -1,8 +1,25 @@
-import pymysql
-pymysql.install_as_MySQLdb()
+import os
 from pathlib import Path
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Simple .env loader for local development
+def load_env():
+    env_path = BASE_DIR / '.env'
+    if not env_path.exists():
+        return
+    for line in env_path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith('#') or '=' not in line:
+            continue
+        key, value = line.split('=', 1)
+        value = value.strip().strip('\"').strip(\"'\")
+        os.environ.setdefault(key.strip(), value)
+
+load_env()
 
 SECRET_KEY = 'django-insecure-your-secret-key-here-for-development'
 

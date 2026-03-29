@@ -1,381 +1,156 @@
-# SmartBus - Professional Bus Tracking & Management System
+﻿# SmartBus
 
-> A comprehensive real-time bus tracking and management system inspired by Indian Railways' FindMyTrain app, designed for modern public transportation needs.
+SmartBus is a full-stack bus tracking and operations platform with a Django API, a React passenger and operator web app, and a separate live-tracking demo client.
 
-![SmartBus](https://img.shields.io/badge/SmartBus-v2.0-blue.svg)
-![Django](https://img.shields.io/badge/Django-4.x-green.svg)
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+## Components
+- Django API in `backend/Smartbus`
+- React web app (passenger and operator UI) in `frontend`
+- Live tracking demo client in `smartbus-tracker`
 
-## 🚌 Overview
+## Highlights
+- Route catalog with stops, fares, schedules, and route types
+- Intelligent route search with validation and suggestions
+- Live tracking APIs for drivers and riders with ETA and delay status
+- Favorites, alerts, arrival notifications, and route analytics
+- Passenger web UI with map view, route search, and bus discovery
+- Operator dashboard with service controls and operational stats (simulated)
+- Leaflet-based tracking demo with animated bus movement and progress
 
-SmartBus is a modern, feature-rich bus tracking and management system that provides real-time location tracking, route management, and passenger convenience features. Built with Django REST Framework, it offers a comprehensive API ecosystem for mobile apps and web interfaces.
+## Architecture
+```
+[Frontend (Vite)] --> /api/* --> [Django API] --> [MySQL]
+[Tracker (CRA)] reads localStorage set by Frontend
+```
 
-## ✨ Key Features
+## Tech Stack
+- Backend: Django 5.x, PyMySQL, django-cors-headers, geopy
+- Frontend: React 19, Vite, CSS Modules
+- Tracker: React (Create React App), Leaflet
+- Database: MySQL
 
-### For Passengers
-- 🔍 **Intelligent Route Search**: Find buses with fuzzy matching and smart suggestions
-- 📍 **Real-Time Live Tracking**: Track bus locations with GPS precision
-- ⏰ **ETA Calculations**: Accurate arrival time predictions
-- ❤️ **Favorite Routes**: Save frequently used routes
-- 🔔 **Smart Notifications**: Bus arrival alerts and service updates
-- 📊 **Route Analytics**: Peak time analysis and delay statistics
-- 🎯 **Location-Based Search**: Find nearby buses and stops
+## Quick Start
 
-### For Drivers
-- 📱 **Driver Mobile API**: Real-time GPS location updates
-- 🚦 **Status Management**: Update bus status (active, delayed, breakdown, etc.)
-- 🛣️ **Route Progress**: Track current stop and route completion
-- 📋 **Trip Management**: Start/end trips with automatic logging
+### Backend (Django API)
+1. Create and activate a virtual environment.
+2. Install dependencies and run migrations.
 
-### For Administrators
-- 🖥️ **Advanced Admin Panel**: Comprehensive bus and route management
-- 📈 **Analytics Dashboard**: Performance metrics and usage statistics
-- ⚠️ **Alert System**: Manage system-wide notifications
-- 🗺️ **Route Management**: Create and modify bus routes and stops
-- 👥 **Operator Management**: Handle multiple bus operators
-- 🔧 **System Monitoring**: Track API performance and usage
+```bash
+cd backend/Smartbus
+python -m venv .venv
+# Windows
+.\.venv\Scripts\Activate.ps1
+# Linux or macOS
+source .venv/bin/activate
 
-## 🏗️ System Architecture
+pip install django django-cors-headers PyMySQL geopy
+python manage.py makemigrations
+python manage.py migrate
+```
 
+3. (Optional) Load sample data.
+
+```bash
+python manage.py add_sample_routes --clear
+```
+
+4. Start the API server.
+
+```bash
+python manage.py runserver
+```
+
+### Frontend (Passenger and Operator UI)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Live Tracker Demo
+```bash
+cd smartbus-tracker
+npm install
+npm start
+```
+
+The tracker runs on port 3001 as configured in `smartbus-tracker/.env`.
+
+## Configuration
+- Database settings: `backend/Smartbus/Smartbus/settings.py`
+- API base URL: `frontend/src/services/api.js`
+- Tracker port: `smartbus-tracker/.env`
+
+## Demo Credentials
+Fixed demo credentials are defined in `backend/Smartbus/users/views.py`.
+- user: `user@smartbus.com` / `user123`
+- admin: `admin@smartbus.com` / `admin123`
+- driver: `driver@smartbus.com` / `driver123`
+- bus: `bus@smartbus.com` / `bus123`
+
+## API Overview
+Base URL: `http://localhost:8000/api`
+
+Authentication
+- POST `/auth/login/`
+- POST `/auth/register/`
+- GET `/auth/check/`
+- GET `/auth/db-check/`
+- GET `/auth/db-info/`
+
+Routes and search
+- GET `/routes/`
+- GET `/routes/<route_id>/`
+- GET `/routes/search/?source=...&destination=...`
+- GET `/routes/find-bus/?route_name=...`
+
+Live tracking
+- POST `/routes/driver/location/update/`
+- POST `/routes/driver/status/update/`
+- GET `/routes/live/<bus_number>/`
+- GET `/routes/live/route/<route_name>/`
+- GET `/routes/tracking/<bus_route_id>/`
+- POST `/routes/tracking/update/`
+
+User features
+- POST `/routes/favorites/add/`
+- GET `/routes/favorites/user/?user_email=...`
+- PUT `/routes/favorites/<favorite_id>/update/`
+- DELETE `/routes/favorites/<favorite_id>/remove/`
+- GET `/routes/alerts/user/?user_email=...`
+- POST `/routes/alerts/create/`
+- GET `/routes/notifications/arrivals/?user_email=...`
+- GET `/routes/analytics/<route_name>/`
+
+Health
+- GET `/health/`
+- GET `/routes/health/`
+
+## Testing
+Backend tests can be run with:
+```bash
+cd backend/Smartbus
+python manage.py test
+```
+
+## Project Structure
 ```
 SmartBus/
-├── backend/Smartbus/          # Django Backend
-│   ├── Smartbus/             # Main project configuration
-│   ├── route/                # Route management app
-│   │   ├── models.py         # Route, Stop, BusRoute models
-│   │   ├── views.py          # Route search and validation APIs
-│   │   ├── live_tracking_views.py  # Live tracking APIs
-│   │   ├── user_features_views.py  # User feature APIs
-│   │   └── admin.py          # Enhanced admin interfaces
-│   ├── bus/                  # Bus management app
-│   │   ├── models.py         # Bus, BusStatus, tracking models
-│   │   └── views.py          # Bus-related APIs
-│   └── manage.py             # Django management
-├── test_smartbus_complete.py # Comprehensive API testing
-├── sample_data_generator.py  # Generate test data
-└── README.md                 # This file
+|-- backend/
+|   |-- Smartbus/
+|       |-- Smartbus/        # Django settings and URLs
+|       |-- route/           # Routes, live tracking, favorites, alerts
+|       |-- users/           # Auth and registration endpoints
+|       |-- manage.py
+|-- frontend/                # Vite React app
+|-- smartbus-tracker/        # Live tracking demo client
+|-- INTEGRATION_GUIDE.md
+|-- PROJECT_STATUS.md
 ```
 
-## 🚀 Quick Start
+## Notes
+- The frontend currently uses the route search API but simulates bus positions in the UI.
+- The tracker client animates movement along a fixed sample route and reads bus info from localStorage.
+- The Django API supports real tracking updates and analytics endpoints, but the live UI wiring can be extended.
 
-### Prerequisites
-- Python 3.8+
-- Django 4.x
-- Django REST Framework
-- SQLite (default) or PostgreSQL/MySQL
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/SmartBus.git
-   cd SmartBus
-   ```
-
-2. **Set up virtual environment**
-   ```bash
-   python -m venv smartbus_env
-   # On Windows
-   smartbus_env\Scripts\activate
-   # On Linux/Mac
-   source smartbus_env/bin/activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   cd backend/Smartbus
-   pip install django djangorestframework django-cors-headers
-   ```
-
-4. **Database setup**
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   python manage.py createsuperuser
-   ```
-
-5. **Load sample data**
-   ```bash
-   python manage.py generate_sample_routes
-   ```
-
-6. **Run the server**
-   ```bash
-   python manage.py runserver
-   ```
-
-7. **Access the application**
-   - API Base URL: `http://localhost:8000/api/`
-   - Admin Panel: `http://localhost:8000/admin/`
-
-## 📚 API Documentation
-
-### Core Endpoints
-
-#### Route Management
-```http
-GET /api/route/search/?from={source}&to={destination}
-# Search routes between locations
-
-GET /api/route/validate/?from={source}&to={destination}
-# Validate and suggest route corrections
-
-GET /api/routes/
-# List all available routes
-```
-
-#### Live Tracking (Driver APIs)
-```http
-POST /api/driver/update-location/
-# Update bus GPS location
-{
-    "bus_id": 1,
-    "driver_id": 1,
-    "latitude": 28.6139,
-    "longitude": 77.2090,
-    "speed": 45.5
-}
-
-POST /api/driver/update-status/
-# Update bus status
-{
-    "bus_id": 1,
-    "driver_id": 1,
-    "status": "active"
-}
-```
-
-#### User Features
-```http
-GET /api/live-location/{bus_id}/
-# Get real-time bus location
-
-POST /api/favorites/
-# Add route to favorites
-{
-    "route_id": 1
-}
-
-GET /api/analytics/route/{route_id}/
-# Get route analytics and statistics
-
-POST /api/alerts/
-# Create user alert
-{
-    "bus_route_id": 1,
-    "alert_type": "arrival",
-    "stop_name": "Central Station"
-}
-```
-
-### Sample API Responses
-
-**Route Search Response:**
-```json
-{
-    "status": "success",
-    "routes": [
-        {
-            "id": 1,
-            "name": "Route 101",
-            "from_location": "Central Station",
-            "to_location": "Airport Terminal",
-            "distance": 25.5,
-            "duration": "45 mins",
-            "buses": [
-                {
-                    "bus_number": "DL01AB1234",
-                    "operator": "Delhi Transport Corp",
-                    "next_arrival": "5 mins"
-                }
-            ]
-        }
-    ],
-    "suggestions": []
-}
-```
-
-**Live Location Response:**
-```json
-{
-    "status": "success",
-    "data": {
-        "bus_id": 1,
-        "bus_number": "DL01AB1234",
-        "current_location": {
-            "latitude": 28.6139,
-            "longitude": 77.2090,
-            "address": "Connaught Place, New Delhi"
-        },
-        "status": "active",
-        "eta": "12 mins",
-        "distance_to_user": 2.3,
-        "next_stops": [
-            "India Gate",
-            "Red Fort",
-            "Chandni Chowk"
-        ]
-    }
-}
-```
-
-## 🧪 Testing
-
-### Run Comprehensive Tests
-```bash
-python test_smartbus_complete.py
-```
-
-The test suite covers:
-- ✅ Route search and validation
-- ✅ Live tracking functionality
-- ✅ Driver APIs
-- ✅ User features (favorites, alerts)
-- ✅ Analytics and statistics
-- ✅ Error handling
-- ✅ Performance testing
-- ✅ Load testing with concurrent requests
-
-### Manual Testing
-1. **Admin Panel**: Access `/admin/` to manage routes, buses, and view analytics
-2. **API Browser**: Use `/api/` to interact with REST endpoints
-3. **Route Search**: Test with various source-destination combinations
-4. **Live Tracking**: Simulate driver location updates
-
-## 🛠️ Technology Stack
-
-### Backend
-- **Django 4.x**: Web framework and ORM
-- **Django REST Framework**: API development
-- **SQLite/PostgreSQL**: Database options
-- **Django CORS Headers**: Cross-origin support
-
-### Key Python Libraries
-- **datetime**: Time handling and calculations
-- **math**: Geographical distance calculations
-- **threading**: Concurrent testing support
-- **requests**: HTTP client for API testing
-
-### Planned Integrations
-- **Google Maps API**: Route visualization and real ETA
-- **WebSocket**: Real-time notifications
-- **Redis**: Caching and session management
-- **Celery**: Background task processing
-
-## 📊 Sample Data
-
-The system includes rich sample data:
-- **50+ Routes**: Covering major Indian cities
-- **Multiple Operators**: Various transport corporations
-- **Realistic Schedules**: Peak and off-peak timings
-- **GPS Coordinates**: Accurate location data
-
-### Sample Routes Include:
-- Delhi Metro Feeder Routes
-- Mumbai Local Bus Services
-- Bangalore City Bus Routes
-- Chennai MTC Routes
-- Inter-city Highway Routes
-
-## 📱 Mobile Integration
-
-### Android/iOS Integration
-```java
-// Android Example
-String apiUrl = "http://your-server.com/api/live-location/1/";
-// Make HTTP request and parse JSON response
-```
-
-```swift
-// iOS Example
-let apiUrl = "http://your-server.com/api/live-location/1/"
-// Use URLSession to fetch data
-```
-
-### React Native Integration
-```javascript
-// React Native Example
-const trackBus = async (busId) => {
-  const response = await fetch(`${API_BASE}/live-location/${busId}/`);
-  const data = await response.json();
-  return data;
-};
-```
-
-## 🔐 Security Features
-
-- **API Key Authentication**: Secure API access
-- **Rate Limiting**: Prevent API abuse
-- **Input Validation**: Sanitize all user inputs
-- **CORS Configuration**: Secure cross-origin requests
-- **Admin Access Control**: Role-based permissions
-
-## 🗺️ Roadmap
-
-### Phase 1: ✅ Completed
-- [x] Route management system
-- [x] Live tracking APIs
-- [x] User features (favorites, alerts)
-- [x] Advanced admin panel
-- [x] Comprehensive testing suite
-
-### Phase 2: 🚧 In Progress
-- [ ] Google Maps integration
-- [ ] Professional UI/UX interface
-- [ ] WebSocket real-time updates
-- [ ] Mobile app development
-
-### Phase 3: 📋 Planned
-- [ ] Payment integration
-- [ ] Seat reservation system
-- [ ] Multi-language support
-- [ ] Offline capabilities
-- [ ] Advanced analytics dashboard
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-### Development Setup
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
-
-### Code Standards
-- Follow PEP 8 for Python code
-- Write comprehensive tests
-- Update documentation
-- Use meaningful commit messages
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Team & Support
-
-### Core Team
-- **Backend Development**: Django REST API
-- **Frontend Development**: React/React Native
-- **Mobile Development**: Android/iOS
-- **DevOps**: Deployment and scaling
-
-### Support
-- 📧 Email: support@smartbus.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/SmartBus/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/SmartBus/discussions)
-- 📖 Documentation: [Wiki](https://github.com/yourusername/SmartBus/wiki)
-
-## 🌟 Acknowledgments
-
-- Inspired by Indian Railways' FindMyTrain app
-- Thanks to Django and DRF communities
-- Special thanks to public transport authorities for route data inspiration
-
----
-
-**Made with ❤️ for better public transportation**
-
-*SmartBus - Making bus travel smarter, one route at a time.*
+## License
+No license has been specified yet.
