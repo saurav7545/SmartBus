@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import MapView from '../../components/UI/MapView';
-import SearchBar from '../../components/UI/SearchBar';
-import UserAccount from '../../components/UI/UserAccount';
-import BusCount from '../../components/UI/BusCount';
-import FindMyBus from '../../components/UI/FindMyBus';
+import MapView from '../../components/ui/MapView';
+import SearchBar from '../../components/ui/SearchBar';
+import UserAccount from '../../components/ui/UserAccount';
+import BusCount from '../../components/ui/BusCount';
+import FindMyBus from '../../components/ui/FindMyBus';
 import { ToastContainer, useToast } from '../../components/common/Toast';
 import styles from './UserDashboard.module.css';
 

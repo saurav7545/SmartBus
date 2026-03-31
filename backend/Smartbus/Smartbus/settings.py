@@ -16,7 +16,7 @@ def load_env():
         if not line or line.startswith('#') or '=' not in line:
             continue
         key, value = line.split('=', 1)
-        value = value.strip().strip('\"').strip(\"'\")
+        value = value.strip().strip('"').strip("'")
         os.environ.setdefault(key.strip(), value)
 
 load_env()
@@ -72,15 +72,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Smartbus.wsgi.application'
 
-# Database
+# Database (MySQL by default; configurable via .env)
+DB_NAME = os.environ.get('DB_NAME', 'smartbus')
+DB_USER = os.environ.get('DB_USER', 'root')
+DB_PASSWORD = os.environ.get('DB_PASSWORD', 'Saurav@123')
+DB_HOST = os.environ.get('DB_HOST', 'localhost')
+DB_PORT = os.environ.get('DB_PORT', '3306')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'smartbus',
-        'USER': 'root',
-        'PASSWORD': 'Saurav@123',  # वही password जिससे आप login हुए
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         }

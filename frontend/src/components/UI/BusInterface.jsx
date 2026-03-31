@@ -1,5 +1,5 @@
 import React from 'react';
-import ConductorDashboard from '../../pages/Dashboard/ConductorDashboard';
+import ConductorDashboard from '../../pages/dashboard/ConductorDashboard';
 
 function BusInterface({ userData, onLogout }) {
   const handleLogout = () => {
